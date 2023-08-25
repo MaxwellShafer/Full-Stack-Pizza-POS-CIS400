@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AssemblyName>PizzaParlor.Data</AssemblyName>
+    <RootNamespace>PizzaParlor.Data</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Ksu.Cs.CodeAnalyzers" Version="1.0.3.4" />
+  </ItemGroup>
+
+</Project>
