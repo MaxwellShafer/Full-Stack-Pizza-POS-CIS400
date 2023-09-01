@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace PizzaParlor.Data
 {
+    /// <summary>
+    /// a class containg the data for Cinnimon sticks
+    /// </summary>
     public class CinnamonSticks
     {
         /// <summary>

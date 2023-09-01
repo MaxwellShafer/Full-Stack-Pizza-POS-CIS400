@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace PizzaParlor.Data
 {
-    internal class GarlicKnots
+    /// <summary>
+    /// A class containing data for Garlic Knots
+    /// </summary>
+    public class GarlicKnots
     {
         /// <summary>
         /// gets the name of the garlic knots
