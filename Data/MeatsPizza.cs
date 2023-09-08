@@ -49,17 +49,84 @@ namespace PizzaParlor.Data
         /// <summary>
         /// gets the price of the pizza
         /// </summary>
-        public decimal Price { get; } = 15.99M;
+        public decimal Price
+        {
+
+            get
+            {
+                decimal price = 15.99M;
+
+                if (PizzaSize.Equals(Size.Sizes.Large))
+                {
+                    price += 2.00M;
+                }
+                else if ((PizzaSize.Equals(Size.Sizes.Small)))
+                {
+                    price -= 2.00M;
+                }
+
+                if (Crusts.Equals(Crust.Crusts.DeepDish))
+                {
+                    price += 1.00M;
+                }
+
+                return price;
+
+            }
+
+
+        }
 
         /// <summary>
         /// gets the calories per each slice of the pizza
         /// </summary>
-        public uint CaloriesPerEach { get; } = 250;
+        public uint CaloriesPerEach
+        {
+            get
+            {
+
+                uint cals = 250;
+
+                if (Crusts.Equals(Crust.Crusts.Thin))
+                {
+                    cals = 150;
+                }
+                if (Crusts.Equals(Crust.Crusts.DeepDish))
+                {
+                    cals = 300;
+                }
+
+                if (Sausage) cals += 30;
+                if (Pepperoni) cals += 20;
+                if (Bacon) cals += 20;
+                if (Ham) cals += 20;
+                
+
+                if (PizzaSize.Equals(Size.Sizes.Large))
+                {
+                    cals = (uint)(cals * 1.3);
+                }
+                if (PizzaSize.Equals(Size.Sizes.Small))
+                {
+                    cals = (uint)(cals * .75);
+                }
+
+                return cals;
+            }
+        }
 
         /// <summary>
         /// gets the total number of calories in the pizza, considering toppings and slices
         /// </summary>
-        public uint CaloriesTotal => CaloriesPerEach + (Sausage ? 60U : 0U) + (Pepperoni ? 30U : 0U) + (Ham ? 30U : 0U) + (Bacon ? 30U : 0U);
+        public uint CaloriesTotal
+        {
+            get
+            {
+                //all pizzas have 8 slices
+
+                return CaloriesPerEach * Slices;
+            }
+        }
 
         /// <summary>
         /// gets special instructions for the pizza based on selected toppings
@@ -68,15 +135,34 @@ namespace PizzaParlor.Data
         {
             get
             {
-                if (!Sausage)
-                    yield return "Hold Sausage";
-                if (!Pepperoni)
-                    yield return "Hold Pepperoni";
-                if (!Ham)
-                    yield return "Hold Ham";
-                if (!Bacon)
-                    yield return "Hold Bacon";
+
+                List<string> instructions = new();
+
+                instructions.Add($"{PizzaSize} Pizza");
+                instructions.Add($"{Crusts} Crust");
+
+                if (!Ham) instructions.Add("Hold Ham");
+
+                if (!Sausage) instructions.Add("Hold Sausage");
+                if (!Bacon) instructions.Add("Hold Bacon");
+                if (!Pepperoni) instructions.Add("Hold Pepperoni");
+
+
+
+                return instructions;
+               
             }
         }
+
+        /// <summary>
+        /// A property that holds the size of the pizza
+        /// </summary>
+        public Size.Sizes PizzaSize { get; set; } = Size.Sizes.Medium;
+
+        /// <summary>
+        /// A property that holds the type of crust
+        /// </summary>
+        public Crust.Crusts Crusts { get; set; } = Crust.Crusts.Original;
+
     }
 }

@@ -22,9 +22,33 @@ namespace PizzaParlor.Data
         public string Description { get; } = "Soft buttery breadsticks";
 
         /// <summary>
+        /// a private field to store the count 
+        /// </summary>
+        private uint _count;
+
+        /// <summary>
         /// gets or sets the count of breadsticks. Defaults to 8, maximum of 12.
         /// </summary>
-        public uint Count { get; set; } = 8;
+        public uint Count { 
+            
+            get {
+                return _count;
+            }
+
+            set
+            {
+                 if( value <= 4)
+                {
+                    _count = 4;
+                }
+                 if(value >= 12)
+                {
+                    _count = 12;
+                }
+
+            }
+        
+        }
 
         /// <summary>
         /// gets or sets a value indicating whether the breadsticks have cheese. Defaults to false.

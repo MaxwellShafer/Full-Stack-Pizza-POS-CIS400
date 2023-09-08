@@ -63,10 +63,30 @@ namespace PizzaParlor.Data
         /// </summary>
         public decimal Price
         {
+
             get
             {
-                return 13.99m;
+                decimal price = 13.99M;
+
+                if (PizzaSize.Equals(Size.Sizes.Large))
+                {
+                    price += 2.00M;
+                }
+                else if ((PizzaSize.Equals(Size.Sizes.Small)))
+                {
+                    price -= 2.00M;
+                }
+
+                if (Crusts.Equals(Crust.Crusts.DeepDish))
+                {
+                    price += 1.00M;
+                }
+
+                return price;
+
             }
+
+
         }
 
         /// <summary>
@@ -76,7 +96,17 @@ namespace PizzaParlor.Data
         {
             get
             {
+
                 uint cals = 250;
+
+                if (Crusts.Equals(Crust.Crusts.Thin))
+                {
+                    cals = 150;
+                }
+                if (Crusts.Equals(Crust.Crusts.DeepDish))
+                {
+                    cals = 300;
+                }
 
                 if (Sausage) cals += 30;
                 if (Pepperoni) cals += 20;
@@ -84,6 +114,15 @@ namespace PizzaParlor.Data
                 if (Peppers) cals += 5;
                 if (Onions) cals += 5;
                 if (Mushrooms) cals += 5;
+
+                if (PizzaSize.Equals(Size.Sizes.Large))
+                {
+                    cals = (uint)(cals * 1.3);
+                }
+                if (PizzaSize.Equals(Size.Sizes.Small))
+                {
+                    cals = (uint)(cals * .75);
+                }
 
                 return cals;
             }
@@ -111,6 +150,9 @@ namespace PizzaParlor.Data
             {
                 List<string> instructions = new();
 
+                instructions.Add($"{PizzaSize} Pizza");
+                instructions.Add($"{Crusts} Crust");
+
                 if (!Sausage) instructions.Add("Hold Sausage");
                 if (!Pepperoni) instructions.Add("Hold Pepperoni");
                 if (!Olives) instructions.Add("Hold Olives");
@@ -120,5 +162,16 @@ namespace PizzaParlor.Data
                 return instructions;
             }
         }
+
+        /// <summary>
+        /// A property that holds the size of the pizza
+        /// </summary>
+        public Size.Sizes PizzaSize { get; set; } = Size.Sizes.Medium;
+
+        /// <summary>
+        /// A property that holds the type of crust
+        /// </summary>
+        public Crust.Crusts Crusts { get; set; } = Crust.Crusts.Original;
+
     }
 }

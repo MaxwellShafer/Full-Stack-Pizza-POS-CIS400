@@ -20,11 +20,34 @@ namespace PizzaParlor.Data
         /// gets the description of the cinnamon sticks
         /// </summary>
         public string Description { get; } = "Like breadsticks but for dessert";
+        /// <summary>
+        /// a private field to store the count 
+        /// </summary>
+        private uint _count = 8;
 
         /// <summary>
-        /// gets or sets the count of cinnamon sticks. Defaults to 8, maximum of 12
+        /// gets or sets the count of wings. Defaults to 8, maximum of 12.
         /// </summary>
-        public uint Count { get; set; } = 8;
+        public uint Count
+        {
+
+            get
+            {
+                return _count;
+            }
+
+            set
+            {
+                if (value <= 4)
+                {
+                    _count = 4;
+                }
+                if (value >= 12)
+                {
+                    _count = 12;
+                }
+            }
+        }
 
         /// <summary>
         /// gets or sets a value indicating whether the cinnamon sticks have frosting. Defaults to true.

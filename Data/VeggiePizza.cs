@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static PizzaParlor.Data.Crust;
 
 namespace PizzaParlor.Data
 {
@@ -49,17 +50,78 @@ namespace PizzaParlor.Data
         /// <summary>
         /// gets the price of the pizza
         /// </summary>
-        public decimal Price { get; } = 12.99M;
+        public decimal Price
+        {
+
+            get
+            {
+                decimal price = 12.99M;
+
+                if (PizzaSize.Equals(Size.Sizes.Large))
+                {
+                    price += 2.00M;
+                }
+                else if ((PizzaSize.Equals(Size.Sizes.Small)))
+                {
+                    price -= 2.00M;
+                }
+
+                if (Crusts.Equals(Crust.Crusts.DeepDish))
+                {
+                    price += 1.00M;
+                }
+
+                return price;
+
+            }
+
+
+        };
 
         /// <summary>
         /// gets the calories per each slice of the pizza, including toppings
         /// </summary>
-        public uint CaloriesPerEach { get; } = 250;
+        public uint CaloriesPerEach
+        {
+
+            get
+            {
+
+                uint cals = 250;
+
+                if (Crusts.Equals(Crust.Crusts.Thin))
+                {
+                    cals = 150;
+                }
+                if (Crusts.Equals(Crust.Crusts.DeepDish))
+                {
+                    cals = 300;
+                }
+
+                
+                if (Olives) cals += 5;
+                if (Peppers) cals += 5;
+                if (Onions) cals += 5;
+                if (Mushrooms) cals += 5;
+
+                if (PizzaSize.Equals(Size.Sizes.Large))
+                {
+                    cals = (uint)(cals * 1.3);
+                }
+                if (PizzaSize.Equals(Size.Sizes.Small))
+                {
+                    cals = (uint)(cals * .75);
+                }
+
+                return cals;
+            }
+
+        }
 
         /// <summary>
         /// gets the total number of calories in the pizza, considering toppings and slices
         /// </summary>
-        public uint CaloriesTotal => CaloriesPerEach + (Olives ? 5U : 0U) + (Peppers ? 5U : 0U) + (Onions ? 5U : 0U) + (Mushrooms ? 5U : 0U);
+        public uint CaloriesTotal => CaloriesPerEach * Slices;
 
         /// <summary>
         /// gets special instructions for the pizza based on selected toppings
@@ -68,15 +130,29 @@ namespace PizzaParlor.Data
         {
             get
             {
-                if (!Olives)
-                    yield return "Hold Olives";
-                if (!Peppers)
-                    yield return "Hold Peppers";
-                if (!Onions)
-                    yield return "Hold Onions";
-                if (!Mushrooms)
-                    yield return "Hold Mushrooms";
+                List<string> instructions = new();
+
+                instructions.Add($"{PizzaSize} Pizza");
+                instructions.Add($"{Crusts} Crust");
+
+                if (!Olives) instructions.Add("Hold Olives");
+                if (!Onions) instructions.Add("Hold Onions");
+                if (!Peppers) instructions.Add("Hold Peppers");
+                if (!Mushrooms) instructions.Add("Hold Mushrooms");
+
+                return instructions;
             }
         }
+
+        /// <summary>
+        /// A property that holds the size of the pizza
+        /// </summary>
+        public Size.Sizes PizzaSize { get; set; } = Size.Sizes.Medium;
+
+        /// <summary>
+        /// A property that holds the type of crust
+        /// </summary>
+        public Crust.Crusts Crusts { get; set; } = Crust.Crusts.Original;
+
     }
 }
