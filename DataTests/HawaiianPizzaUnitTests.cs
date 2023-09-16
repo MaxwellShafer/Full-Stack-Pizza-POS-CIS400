@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace DataTests
 {
+    /// <summary>
+    /// Test class for Hawaiian Pizza
+    /// </summary>
     public class HawaiianPizzaUnitTests
     {
         /// <summary>

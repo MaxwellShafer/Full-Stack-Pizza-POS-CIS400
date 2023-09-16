@@ -24,7 +24,7 @@ namespace PizzaParlor.Data
         /// <summary>
         /// a private field to store the count 
         /// </summary>
-        private uint _count = 8;
+        private uint _count = 5;
 
         /// <summary>
         /// gets or sets the count of wings. Defaults to 8, maximum of 12.
@@ -39,13 +39,9 @@ namespace PizzaParlor.Data
 
             set
             {
-                if (value <= 4)
+                if (value >= 4 && value <= 12)
                 {
-                    _count = 4;
-                }
-                if (value >= 12)
-                {
-                    _count = 12;
+                    _count = value;
                 }
             }
         }
@@ -75,11 +71,11 @@ namespace PizzaParlor.Data
 
                 if (Sauce.Equals(WingSauce.WingSauces.HoneyBBQ))
                 {
-                    return 175U + (BoneIn ? 50U : 0U);
+                    return 125U + (BoneIn ? 50U : 0U);
                 }
                 else
                 {
-                    return 125U + (BoneIn ? 50U : 0U);
+                    return 175U + (BoneIn ? 50U : 0U);
                 }
 
             }
@@ -100,7 +96,7 @@ namespace PizzaParlor.Data
                 { yield return Count.ToString() + " Bone-In Wings"; }
                 else
                 {
-                    yield return Count.ToString() + " Bone-In Wings";
+                    yield return Count.ToString() + " Boneless Wings";
                 }
 
                 yield return Sauce.ToString() + " Sauce";
