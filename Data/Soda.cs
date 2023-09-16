@@ -19,7 +19,7 @@ namespace PizzaParlor.Data
         /// <summary>
         /// string representing the description of the soda.
         /// </summary>
-        public string Description { get; } = "Standard Foutain Drink";
+        public string Description { get; } = "Standard Fountain Drink";
 
         /// <summary>
         /// boolean representing whether the soda has ice

@@ -24,7 +24,7 @@ namespace PizzaParlor.Data
         /// <summary>
         /// a private field to store the count 
         /// </summary>
-        private uint _count;
+        private uint _count = 8;
 
         /// <summary>
         /// gets or sets the count of breadsticks. Defaults to 8, maximum of 12.
@@ -37,13 +37,9 @@ namespace PizzaParlor.Data
 
             set
             {
-                 if( value <= 4)
+                if (value >= 4 && value <= 12)
                 {
-                    _count = 4;
-                }
-                 if(value >= 12)
-                {
-                    _count = 12;
+                    _count = value;
                 }
 
             }
@@ -58,17 +54,29 @@ namespace PizzaParlor.Data
         /// <summary>
         /// gets the price of each breadstick. $0.75 each for plain breadsticks, $1.00 for cheesesticks.
         /// </summary>
-        public decimal Price { get; } = 0.75M;
+        public decimal Price {
+            get
+            {
+                if (Cheese)
+                {
+                    return 1M* Count;
+                }
+                else
+                {
+                    return .75M * Count;
+                }
+            }
+        }
 
         /// <summary>
         /// gets the calories per each breadstick. 150 for plain breadsticks, plus 50 calories for cheesesticks.
         /// </summary>
-        public uint CaloriesPerEach { get; } = 150;
+        public uint CaloriesPerEach => (Cheese ?  200U : 150U);
 
         /// <summary>
         /// gets the total number of calories in all breadsticks, considering the count and type (cheesesticks or plain breadsticks).
         /// </summary>
-        public uint CaloriesTotal => (Cheese ? CaloriesPerEach + 50U : CaloriesPerEach) * Count;
+        public uint CaloriesTotal =>  CaloriesPerEach * Count;
 
         /// <summary>
         /// gets special instructions for the breadsticks based on the count and type (cheesesticks or plain breadsticks).
@@ -77,10 +85,20 @@ namespace PizzaParlor.Data
         {
             get
             {
+                List<string> instructions = new();
+
                 if (Cheese)
-                    yield return $"{Count} Cheesesticks";
+                {
+                    instructions.Add($"{Count} Cheesesticks");
+                }
+
                 else
-                    yield return $"{Count} Breadsticks";
+                {
+                    instructions.Add($"{Count} Breadsticks");
+                    
+                }
+
+                return instructions;
             }
         }
     }

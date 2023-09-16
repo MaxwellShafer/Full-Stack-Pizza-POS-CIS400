@@ -76,7 +76,7 @@ namespace PizzaParlor.Data
             }
 
 
-        };
+        }
 
         /// <summary>
         /// gets the calories per each slice of the pizza, including toppings

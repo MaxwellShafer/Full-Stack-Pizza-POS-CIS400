@@ -38,14 +38,11 @@ namespace PizzaParlor.Data
 
             set
             {
-                if (value <= 4)
+                if (value >= 4 && value <= 12)
                 {
-                    _count = 4;
+                    _count = value;
                 }
-                if (value >= 12)
-                {
-                    _count = 12;
-                }
+                
             }
         }
 
@@ -57,17 +54,41 @@ namespace PizzaParlor.Data
         /// <summary>
         /// gets the price of each cinnamon stick. $0.75 each for plain cinnamon sticks, $0.90 each with frosting.
         /// </summary>
-        public decimal Price { get; } = 0.75M;
+        public decimal Price {
+            get
+            {
+                if (Frosting)
+                {
+                    return .9M;
+                }
+                else
+                {
+                    return .75M;
+                }
+            }
+        } 
 
         /// <summary>
         /// gets the calories per each cinnamon stick. 160 for plain cinnamon sticks, plus 30 calories for frosting.
         /// </summary>
-        public uint CaloriesPerEach { get; } = 160;
-
+        public uint CaloriesPerEach
+        {
+            get
+            {
+                if (Frosting)
+                {
+                    return 190U;
+                }
+                else
+                {
+                    return 160U;
+                }
+            }
+        }
         /// <summary>
         /// gets the total number of calories in all cinnamon sticks, considering the count and frosting.
         /// </summary>
-        public uint CaloriesTotal => (Frosting ? CaloriesPerEach + 30U : CaloriesPerEach) * Count;
+        public uint CaloriesTotal => CaloriesPerEach * Count;
 
         /// <summary>
         /// gets special instructions for the cinnamon sticks based on the count and frosting.
