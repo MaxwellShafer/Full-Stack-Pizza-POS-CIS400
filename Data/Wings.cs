@@ -9,17 +9,17 @@ namespace PizzaParlor.Data
     /// <summary>
     /// A class definition for Wings
     /// </summary>
-    public class Wings
+    public class Wings : Sides, IMenuItem
     {
         /// <summary>
         /// gets the name of the wings
         /// </summary>
-        public string Name { get; } = "Wings";
+        override public string Name { get; } = "Wings";
 
         /// <summary>
         /// gets the description of the wings
         /// </summary>
-        public string Description { get; } = "Chicken wings tossed in sauce";
+        override public string Description { get; } = "Chicken wings tossed in sauce";
 
         /// <summary>
         /// a private field to store the count 
@@ -29,7 +29,7 @@ namespace PizzaParlor.Data
         /// <summary>
         /// gets or sets the count of wings. Defaults to 8, maximum of 12.
         /// </summary>
-        public uint Count
+        override public uint Count
         {
 
             get
@@ -59,12 +59,12 @@ namespace PizzaParlor.Data
         /// <summary>
         /// gets the price of the wings
         /// </summary>
-        public decimal Price => (BoneIn ? ( (decimal)Count * (decimal)1.5) :((decimal)Count * (decimal)1.75));
+        override public decimal Price => (BoneIn ? ( (decimal)Count * (decimal)1.5) :((decimal)Count * (decimal)1.75));
 
         /// <summary>
         /// gets the calories per each wing ,
         /// </summary>
-        public uint CaloriesPerEach
+        override public uint CaloriesPerEach
         {
             get
             {
@@ -83,12 +83,12 @@ namespace PizzaParlor.Data
         /// <summary>
         /// gets the total number of calories of the wings
         /// </summary>
-        public uint CaloriesTotal => CaloriesPerEach * Count;
+        override public uint CaloriesTotal => CaloriesPerEach * Count;
 
         /// <summary>
         /// gets special instructions for the wings
         /// </summary>
-        public IEnumerable<string> SpecialInstructions
+        override public IEnumerable<string> SpecialInstructions
         {
             get
             {

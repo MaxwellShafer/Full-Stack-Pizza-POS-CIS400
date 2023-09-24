@@ -5,7 +5,7 @@ namespace PizzaParlor.Data
     /// <summary>
     /// This is the definition for the supreme pizza class
     /// </summary>
-    public class SupremePizza
+    public class SupremePizza : Pizza, IMenuItem
     {
         /// <summary>
         /// The name of the SupremePizza instance
@@ -13,7 +13,7 @@ namespace PizzaParlor.Data
         /// <remarks>
         /// This is an example of an get-only autoproperty with a default value
         /// </remarks>
-        public string Name { get; } = "Supreme Pizza";
+        override public string Name { get; } = "Supreme Pizza";
 
         /// <summary>
         /// The description of the SupremePizza instance
@@ -21,157 +21,22 @@ namespace PizzaParlor.Data
         /// <remarks>
         /// This is also a get-only autoproperty, but it was declared using lambda syntax
         /// </remarks>
-        public string Description => "Your standard supreme with meats and veggies";
+        override public string Description => "Your standard supreme with meats and veggies";
 
         /// <summary>
-        /// Whether this SupremePizza instance contains sausage
+        /// A constructor for a supreme pizza
         /// </summary>
-        public bool Sausage { get; set; } = true;
-
-        /// <summary>
-        /// Whether this SupremePizza instance contains pepperoni
-        /// </summary>
-        public bool Pepperoni { get; set; } = true;
-
-        /// <summary>
-        /// Whether this SupremePizza instance contains olives
-        /// </summary>
-        public bool Olives { get; set; } = true;
-
-        /// <summary>
-        /// Whether this SupremePizza instance contains peppers
-        /// </summary>
-        public bool Peppers { get; set; } = true;
-
-        /// <summary>
-        /// Whether this SupremePizza instance contains onions
-        /// </summary>
-        public bool Onions { get; set; } = true;
-
-        /// <summary>
-        /// Whether this SupremePizza instance contains mushrooms
-        /// </summary>
-        public bool Mushrooms { get; set; } = true;
-
-        /// <summary>
-        /// The number of slices in this SupremePizza instance
-        /// </summary>
-        public uint Slices { get; } = 8;
-
-        /// <summary>
-        /// The price of this SupremePizza instance
-        /// </summary>
-        public decimal Price
+        public SupremePizza() : base()
         {
-
-            get
-            {
-                decimal price = 13.99M;
-
-                if (PizzaSize.Equals(Size.Sizes.Large))
-                {
-                    price += 2.00M;
-                }
-                else if ((PizzaSize.Equals(Size.Sizes.Small)))
-                {
-                    price -= 2.00M;
-                }
-
-                if (Crusts.Equals(Crust.Crusts.DeepDish))
-                {
-                    price += 1.00M;
-                }
-
-                return price;
-
-            }
-
+            FindTopping(Topping.Mushrooms).OnPizza = true;
+            FindTopping(Topping.Onions).OnPizza = true;
+            FindTopping(Topping.Peppers).OnPizza = true;
+            FindTopping(Topping.Olives).OnPizza = true;
+            FindTopping(Topping.Pepperoni).OnPizza = true;
+            FindTopping(Topping.Sausage).OnPizza = true;
 
         }
-
-        /// <summary>
-        /// The number of calories in each slice of this SupremePizza instance
-        /// </summary>
-        public uint CaloriesPerEach
-        {
-            get
-            {
-
-                uint cals = 250;
-
-                if (Crusts.Equals(Crust.Crusts.Thin))
-                {
-                    cals = 150;
-                }
-                if (Crusts.Equals(Crust.Crusts.DeepDish))
-                {
-                    cals = 300;
-                }
-
-                if (Sausage) cals += 30;
-                if (Pepperoni) cals += 20;
-                if (Olives) cals += 5;
-                if (Peppers) cals += 5;
-                if (Onions) cals += 5;
-                if (Mushrooms) cals += 5;
-
-                if (PizzaSize.Equals(Size.Sizes.Large))
-                {
-                    cals = (uint)(cals * 1.3);
-                }
-                if (PizzaSize.Equals(Size.Sizes.Small))
-                {
-                    cals = (uint)(cals * .75);
-                }
-
-                return cals;
-            }
-        }
-
-        /// <summary>
-        /// The total number of calories in this SupremePizza instance
-        /// </summary>
-        public uint CaloriesTotal
-        {
-            get
-            {
-                //all pizzas have 8 slices
-
-                return CaloriesPerEach * Slices;
-            }
-        }
-
-        /// <summary>
-        /// Special instructions for the preparation of this FlyingSaucer
-        /// </summary>
-        public IEnumerable<string> SpecialInstructions
-        {
-            get
-            {
-                List<string> instructions = new();
-
-                instructions.Add($"{PizzaSize} Pizza");
-                instructions.Add($"{Crusts} Crust");
-
-                if (!Sausage) instructions.Add("Hold Sausage");
-                if (!Pepperoni) instructions.Add("Hold Pepperoni");
-                if (!Olives) instructions.Add("Hold Olives");
-                if (!Onions) instructions.Add("Hold Onions");
-                if (!Peppers) instructions.Add("Hold Peppers");
-                if (!Mushrooms) instructions.Add("Hold Mushrooms");
-                return instructions;
-            }
-        }
-
-        /// <summary>
-        /// A property that holds the size of the pizza
-        /// </summary>
-        public Size.Sizes PizzaSize { get; set; } = Size.Sizes.Medium;
-
-        /// <summary>
-        /// A property that holds the type of crust
-        /// </summary>
-        public Crust.Crusts Crusts { get; set; } = Crust.Crusts.Original;
+    
 
     }
 }

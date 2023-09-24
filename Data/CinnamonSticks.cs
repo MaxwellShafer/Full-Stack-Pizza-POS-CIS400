@@ -9,17 +9,17 @@ namespace PizzaParlor.Data
     /// <summary>
     /// a class containg the data for Cinnimon sticks
     /// </summary>
-    public class CinnamonSticks
+    public class CinnamonSticks : Sides, IMenuItem
     {
         /// <summary>
         /// gets the name of the cinnamon sticks
         /// </summary>
-        public string Name { get; } = "Cinnamon Sticks";
+        override public string Name { get; } = "Cinnamon Sticks";
 
         /// <summary>
         /// gets the description of the cinnamon sticks
         /// </summary>
-        public string Description { get; } = "Like breadsticks but for dessert";
+        override public string Description { get; } = "Like breadsticks but for dessert";
         /// <summary>
         /// a private field to store the count 
         /// </summary>
@@ -28,7 +28,7 @@ namespace PizzaParlor.Data
         /// <summary>
         /// gets or sets the count of wings. Defaults to 8, maximum of 12.
         /// </summary>
-        public uint Count
+        override public uint Count
         {
 
             get
@@ -54,7 +54,7 @@ namespace PizzaParlor.Data
         /// <summary>
         /// gets the price of each cinnamon stick. $0.75 each for plain cinnamon sticks, $0.90 each with frosting.
         /// </summary>
-        public decimal Price {
+        override public decimal Price {
             get
             {
                 if (Frosting)
@@ -66,12 +66,12 @@ namespace PizzaParlor.Data
                     return .75M;
                 }
             }
-        } 
+        }
 
         /// <summary>
         /// gets the calories per each cinnamon stick. 160 for plain cinnamon sticks, plus 30 calories for frosting.
         /// </summary>
-        public uint CaloriesPerEach
+        override public uint CaloriesPerEach
         {
             get
             {
@@ -88,12 +88,12 @@ namespace PizzaParlor.Data
         /// <summary>
         /// gets the total number of calories in all cinnamon sticks, considering the count and frosting.
         /// </summary>
-        public uint CaloriesTotal => CaloriesPerEach * Count;
+        override public uint CaloriesTotal => CaloriesPerEach * Count;
 
         /// <summary>
         /// gets special instructions for the cinnamon sticks based on the count and frosting.
         /// </summary>
-        public IEnumerable<string> SpecialInstructions
+        override public IEnumerable<string> SpecialInstructions
         {
             get
             {

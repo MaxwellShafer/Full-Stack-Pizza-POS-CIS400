@@ -9,7 +9,7 @@ namespace DataTests
     /// <summary>
     /// Test cases for Meat pizza
     /// </summary>
-    public class MeatsPizzaUnitTests
+    public class SupremePizzaUnitTests
     {
         /// <summary>
         /// test for name property defaults to meats pizza.
@@ -17,9 +17,9 @@ namespace DataTests
         [Fact]
         public void NamePropertyDefaultsToMeatsPizzaTest()
         {
-            var meatsPizza = new MeatsPizza();
-            string name = meatsPizza.Name;
-            Assert.Equal("Meats Pizza", name);
+            var supremePizza = new SupremePizza();
+            string name = supremePizza.Name;
+            Assert.Equal("Supreme Pizza", name);
         }
 
         /// <summary>
@@ -28,9 +28,9 @@ namespace DataTests
         [Fact]
         public void DescriptionPropertyDefaultsToAllTheMeatsTest()
         {
-            var meatsPizza = new MeatsPizza();
-            string description = meatsPizza.Description;
-            Assert.Equal("All the meats", description);
+            var supremePizza = new SupremePizza();
+            string description = supremePizza.Description;
+            Assert.Equal("Your standard supreme with meats and veggies", description);
         }
 
     }

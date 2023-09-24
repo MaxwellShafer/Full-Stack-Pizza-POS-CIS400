@@ -9,27 +9,27 @@ namespace PizzaParlor.Data
     /// <summary>
     /// Represents a soda drink.
     /// </summary>
-    public class Soda
+    public class Soda : Drinks, IMenuItem
     {
         /// <summary>
         /// string representing the name of the soda.
         /// </summary>
-        public string Name { get; } = "Soda";
+        override public string Name { get; } = "Soda";
 
         /// <summary>
         /// string representing the description of the soda.
         /// </summary>
-        public string Description { get; } = "Standard Fountain Drink";
+        override public string Description { get; } = "Standard Fountain Drink";
 
         /// <summary>
         /// boolean representing whether the soda has ice
         /// </summary>
-        public bool Ice { get; set; } = true;
+        override public bool Ice { get; set; } = true;
 
         /// <summary>
         /// Size representing the size of the soda
         /// </summary>
-        public Size.Sizes DrinkSize { get; set; } = Size.Sizes.Medium;
+        override public Size.Sizes DrinkSize { get; set; } = Size.Sizes.Medium;
 
         /// <summary>
         /// SodaFlavor representing the flavor of the soda
@@ -39,7 +39,7 @@ namespace PizzaParlor.Data
         /// <summary>
         /// decimal representing the price of the soda
         /// </summary>
-        public decimal Price
+        override public decimal Price
         {
             get
             {
@@ -51,24 +51,9 @@ namespace PizzaParlor.Data
         }
 
         /// <summary>
-        /// uint representing the calories of the soda.
-        /// </summary>
-        public uint Calories
-        {
-            get
-            {
-                if (DrinkType == SodaFlavor.SodaFlavors.DietCoke) return 0;
-                if (DrinkSize == Size.Sizes.Small) return 150;
-                if (DrinkSize == Size.Sizes.Medium) return 200;
-                if (DrinkSize == Size.Sizes.Large) return 250;
-                return 0;
-            }
-        }
-
-        /// <summary>
         /// an enumerable representing special instructions for the soda.
         /// </summary>
-        public IEnumerable<string> SpecialInstructions
+        override public IEnumerable<string> SpecialInstructions
         {
             get
             {
@@ -84,6 +69,35 @@ namespace PizzaParlor.Data
                 }
 
                 return instructions;
+            }
+        }
+        /// <summary>
+        /// Calculates the calories per each drink
+        /// </summary>
+        override public uint CaloriesPerEach
+        {
+            get
+            {
+                if (DrinkType == SodaFlavor.SodaFlavors.DietCoke) return 0;
+                if (DrinkSize == Size.Sizes.Small) return 150;
+                if (DrinkSize == Size.Sizes.Medium) return 200;
+                if (DrinkSize == Size.Sizes.Large) return 250;
+                return 0;
+            }
+        }
+
+        /// <summary>
+        /// Calculates the calorie total
+        /// </summary>
+        override public uint CaloriesTotal
+        {
+            get
+            {
+                if (DrinkType == SodaFlavor.SodaFlavors.DietCoke) return 0;
+                if (DrinkSize == Size.Sizes.Small) return 150;
+                if (DrinkSize == Size.Sizes.Medium) return 200;
+                if (DrinkSize == Size.Sizes.Large) return 250;
+                return 0;
             }
         }
     }

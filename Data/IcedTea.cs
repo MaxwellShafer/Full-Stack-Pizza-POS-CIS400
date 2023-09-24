@@ -9,32 +9,32 @@ namespace PizzaParlor.Data
     /// <summary>
     /// Represents an iced tea drink.
     /// </summary>
-    public class IcedTea
+    public class IcedTea : Drinks, IMenuItem
     {
         /// <summary>
         /// string representing the name of the iced tea.
         /// </summary>
-        public string Name { get; } = "Iced Tea";
+        override public string Name { get; } = "Iced Tea";
 
         /// <summary>
         /// string representing the description of the iced tea
         /// </summary>
-        public string Description { get; } = "Freshly brewed sweet tea";
+        override public string Description { get; } = "Freshly brewed sweet tea";
 
         /// <summary>
         /// boolean representing whether the iced tea has ice 
         /// </summary>
-        public bool Ice { get; set; } = true;
+        override public bool Ice { get; set; } = true;
 
         /// <summary>
         /// Size representing the size of the iced tea 
         /// </summary>
-        public Size.Sizes DrinkSize { get; set; } = Size.Sizes.Medium;
+        override public Size.Sizes DrinkSize { get; set; } = Size.Sizes.Medium;
 
         /// <summary>
         /// decimal representing the price of the iced tea.
         /// </summary>
-        public decimal Price
+        override public decimal Price
         {
             get
             {
@@ -62,7 +62,7 @@ namespace PizzaParlor.Data
         /// <summary>
         ///  special instructions for the iced tea.
         /// </summary>
-        public IEnumerable<string> SpecialInstructions
+        override public IEnumerable<string> SpecialInstructions
         {
             get
             {
@@ -77,6 +77,34 @@ namespace PizzaParlor.Data
                 }
 
                 return instructions;
+            }
+        }
+
+        /// <summary>
+        /// Calculate the calories per each
+        /// </summary>
+        override public uint CaloriesPerEach
+        {
+            get
+            {
+                if (DrinkSize == Size.Sizes.Small) return 175;
+                if (DrinkSize == Size.Sizes.Medium) return 220;
+                if (DrinkSize == Size.Sizes.Large) return 275;
+                return 0;
+            }
+        }
+
+        /// <summary>
+        /// calculate the calorie totals
+        /// </summary>
+         override public uint CaloriesTotal
+        {
+            get
+            {
+                if (DrinkSize == Size.Sizes.Small) return 175;
+                if (DrinkSize == Size.Sizes.Medium) return 220;
+                if (DrinkSize == Size.Sizes.Large) return 275;
+                return 0;
             }
         }
     }

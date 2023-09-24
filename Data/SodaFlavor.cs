@@ -9,7 +9,7 @@ namespace PizzaParlor.Data
     /// <summary>
     /// a class containing a definition of an enum for soda flavors
     /// </summary>
-    public class SodaFlavor
+    public class SodaFlavor 
     {
 
         /// <summary>

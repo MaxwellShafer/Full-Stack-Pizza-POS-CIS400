@@ -53,10 +53,12 @@ namespace DataTests
         /// <summary>
         /// Test for the Count property with valid input.
         /// </summary>
+        /// <param name="inputCount">the input</param>
+        /// <param name="expectedCount">expected value</param>
         [Theory]
         [InlineData(5, 5)]
         [InlineData(8, 8)]
-        [InlineData(15, 5)] // Should enforce the maximum constraint
+        [InlineData(15, 5)] 
         public void CountPropertyShouldReturnValidValueTest(uint inputCount, uint expectedCount)
         {
             var wings = new Wings();

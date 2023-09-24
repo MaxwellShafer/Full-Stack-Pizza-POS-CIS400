@@ -9,17 +9,17 @@ namespace PizzaParlor.Data
     /// <summary>
     /// A class containing the data of Bread Sticks
     /// </summary>
-    public class Breadsticks
+    public class Breadsticks : Sides, IMenuItem
     {
         /// <summary>
         /// gets the name of the breadsticks
         /// </summary>
-        public string Name { get; } = "Breadsticks";
+        override public string Name { get; } = "Breadsticks";
 
         /// <summary>
         /// gets the description of the breadsticks
         /// </summary>
-        public string Description { get; } = "Soft buttery breadsticks";
+        override public string Description { get; } = "Soft buttery breadsticks";
 
         /// <summary>
         /// a private field to store the count 
@@ -29,7 +29,7 @@ namespace PizzaParlor.Data
         /// <summary>
         /// gets or sets the count of breadsticks. Defaults to 8, maximum of 12.
         /// </summary>
-        public uint Count { 
+        override public uint Count { 
             
             get {
                 return _count;
@@ -54,7 +54,7 @@ namespace PizzaParlor.Data
         /// <summary>
         /// gets the price of each breadstick. $0.75 each for plain breadsticks, $1.00 for cheesesticks.
         /// </summary>
-        public decimal Price {
+        override public decimal Price {
             get
             {
                 if (Cheese)
@@ -71,17 +71,17 @@ namespace PizzaParlor.Data
         /// <summary>
         /// gets the calories per each breadstick. 150 for plain breadsticks, plus 50 calories for cheesesticks.
         /// </summary>
-        public uint CaloriesPerEach => (Cheese ?  200U : 150U);
+        override public uint CaloriesPerEach => (Cheese ?  200U : 150U);
 
         /// <summary>
         /// gets the total number of calories in all breadsticks, considering the count and type (cheesesticks or plain breadsticks).
         /// </summary>
-        public uint CaloriesTotal =>  CaloriesPerEach * Count;
+        override public uint CaloriesTotal =>  CaloriesPerEach * Count;
 
         /// <summary>
         /// gets special instructions for the breadsticks based on the count and type (cheesesticks or plain breadsticks).
         /// </summary>
-        public IEnumerable<string> SpecialInstructions
+        override public IEnumerable<string> SpecialInstructions
         {
             get
             {

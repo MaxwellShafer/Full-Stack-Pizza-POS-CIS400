@@ -9,17 +9,17 @@ namespace PizzaParlor.Data
     /// <summary>
     /// A class containing data for Garlic Knots
     /// </summary>
-    public class GarlicKnots
+    public class GarlicKnots :Sides, IMenuItem
     {
         /// <summary>
         /// gets the name of the garlic knots
         /// </summary>
-        public string Name { get; } = "Garlic Knots";
+        override public string Name { get; } = "Garlic Knots";
 
         /// <summary>
         /// gets the description of the garlic knots
         /// </summary>
-        public string Description { get; } = "Twisted rolls with garlic and butter";
+        override public string Description { get; } = "Twisted rolls with garlic and butter";
 
         /// <summary>
         /// a private field to store the count 
@@ -29,7 +29,7 @@ namespace PizzaParlor.Data
         /// <summary>
         /// gets or sets the count of wings. Defaults to 8, maximum of 12.
         /// </summary>
-        public uint Count
+        override public uint Count
         {
 
             get
@@ -49,22 +49,22 @@ namespace PizzaParlor.Data
         /// <summary>
         /// gets the price of each garlic knot. $0.75 each
         /// </summary>
-        public decimal Price { get; } = 0.75M;
+        override public decimal Price => 0.75M * Count;
 
         /// <summary>
         /// gets the calories per each garlic knot. 175
         /// </summary>
-        public uint CaloriesPerEach { get; } = 175;
+        override public uint CaloriesPerEach { get; } = 175;
 
         /// <summary>
         /// gets the total number of calories in all garlic knots, considering the count.
         /// </summary>
-        public uint CaloriesTotal => CaloriesPerEach * Count;
+        override public uint CaloriesTotal => CaloriesPerEach * Count;
 
         /// <summary>
         /// gets special instructions for the garlic knots based on the count.
         /// </summary>
-        public IEnumerable<string> SpecialInstructions
+        override public IEnumerable<string> SpecialInstructions
         {
             get
             {

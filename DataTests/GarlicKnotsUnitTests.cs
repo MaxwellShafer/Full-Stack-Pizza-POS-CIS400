@@ -64,11 +64,11 @@ namespace DataTests
         /// verifies that the Price property returns the correct price
         /// </summary>
         [Fact]
-        public void PricePropertyDefaultsTo075Test()
+        public void PricePropertyDefaultsTo6Test()
         {
             var garlicKnots = new GarlicKnots();
             decimal price = garlicKnots.Price;
-            Assert.Equal(0.75M, price);
+            Assert.Equal(6.00M, price);
         }
 
         /// <summary>

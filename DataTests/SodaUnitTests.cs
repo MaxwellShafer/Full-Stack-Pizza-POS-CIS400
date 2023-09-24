@@ -84,7 +84,7 @@ namespace DataTests
         public void CaloriesPropertyCalculatesCorrectlyForMediumSoda()
         {
             var soda = new Soda();
-            uint calories = soda.Calories;
+            uint calories = soda.CaloriesTotal;
             Assert.Equal(200U, calories);
         }
 
