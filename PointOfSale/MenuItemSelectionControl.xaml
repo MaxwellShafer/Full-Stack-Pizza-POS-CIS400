@@ -1,0 +1,43 @@
+﻿<UserControl x:Class="PizzaParlor.PointOfSale.MenuItemSelectionControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PizzaParlor.PointOfSale"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="720">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height=".75*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBox Grid.Row="0" Grid.Column="0" TextAlignment="Center">Pizza:</TextBox>
+        <Button Grid.Row="1" Grid.Column="0" Click="AddPizzaClick">Build-Your-Own</Button>
+        <Button Grid.Row="2" Grid.Column="0" Click="AddMeatPizzaClick">Meat Pizza</Button>
+        <Button Grid.Row="3" Grid.Column="0" Click="AddVeggiePizzaClick">Veggie Pizza</Button>
+        <Button Grid.Row="4" Grid.Column="0" Click="AddHawaiianPizzaClick"> Hawaiian Pizza</Button>
+        <Button Grid.Row="5" Grid.Column="0" Click="AddSupremePizzaClick">Supreme Pizza</Button>
+
+        <TextBox Grid.Row="0" Grid.Column="1" TextAlignment="Center">Sides:</TextBox>
+        <Button Grid.Row="1" Grid.Column="1" Click="AddWingsClick">Wings</Button>
+        <Button Grid.Row="2" Grid.Column="1" Click="AddBreadSticksClick">BreadSticks</Button>
+        <Button Grid.Row="3" Grid.Column="1" Click="AddGarlicKnotsClick">Garic Knots</Button>
+        <Button Grid.Row="4" Grid.Column="1" Click="AddCinnamonSticksClick">Cinnamon Sticks</Button>
+
+        <TextBox Grid.Row="0" Grid.Column="2" TextAlignment="Center">Drink:</TextBox>
+        <Button Grid.Row="1" Grid.Column="3" Click="AddSodaClick">Soda</Button>
+        <Button Grid.Row="2" Grid.Column="3" Click="AddTeaClick">Iced Tea</Button>
+       
+    </Grid>
+</UserControl>

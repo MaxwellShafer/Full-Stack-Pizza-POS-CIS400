@@ -197,6 +197,15 @@ namespace PizzaParlor.Data
 
             throw new ArgumentException("Pizza Topping not in list");
         }
-        
+
+        /// <summary>
+        /// Override to string method
+        /// </summary>
+        /// <returns> the name</returns>
+        public override string ToString()
+        {
+            return Name;
+        }
+
     }
 }

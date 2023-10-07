@@ -102,5 +102,14 @@ namespace PizzaParlor.Data
                     yield return "Hold Frosting";
             }
         }
+
+        /// <summary>
+        /// Override to string method
+        /// </summary>
+        /// <returns> the name</returns>
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }
