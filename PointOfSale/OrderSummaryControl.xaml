@@ -8,19 +8,47 @@
              d:DesignHeight="690" d:DesignWidth="360">
     <DockPanel>
         <DockPanel.Resources>
-            <Style TargetType="TextBox">
+            <Style TargetType="TextBlock">
                 <Setter Property="DockPanel.Dock" Value="Top"></Setter>
                 <Setter Property="Height" Value="40"/>
                 <Setter Property="FontSize" Value="20"/>
+                
             </Style>
+           
         </DockPanel.Resources>
-        <TextBox>Order Summary</TextBox>
         
-       
-        <TextBox DockPanel.Dock="Bottom">Total</TextBox>
-        <TextBox DockPanel.Dock="Bottom">Tax</TextBox>
-        <TextBox DockPanel.Dock="Bottom">Subtotal</TextBox>
-        <ListView DockPanel.Dock="Bottom" ItemsSource="{Binding}"/>
+        <TextBlock>Order Summary</TextBlock>
+        <DockPanel DockPanel.Dock="Top">
+            <TextBlock Width ="260" DockPanel.Dock ="Right"  Text="{Binding Path=PlacedAt}"/>
+            <TextBlock DockPanel.Dock="Right" Text="{Binding Path=Number}"/>
+        </DockPanel>
+        
+
+        <DockPanel DockPanel.Dock="Bottom">
+            <TextBlock Width ="260" TextAlignment="Right" DockPanel.Dock="Right" Text="{Binding Path=Total, Mode=OneWay}"/>
+            <TextBlock DockPanel.Dock="Right">Total:</TextBlock>
+        </DockPanel>
+        <DockPanel DockPanel.Dock="Bottom">
+            <TextBlock Width ="260" TextAlignment="Right" DockPanel.Dock="Right" Text="{Binding Path=Tax, Mode=OneWay}"/>
+            <TextBlock DockPanel.Dock="Right">Tax:</TextBlock>
+        </DockPanel>
+        <DockPanel DockPanel.Dock="Bottom">
+            <TextBlock Width ="260" TextAlignment="Right" DockPanel.Dock="Right" Text="{Binding Path=Subtotal, Mode=OneWay}"/>
+            <TextBlock DockPanel.Dock="Right">Subtotal:</TextBlock>
+        </DockPanel>
+
+
+
+        <ListView DockPanel.Dock="Bottom" ItemsSource="{Binding}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <DockPanel>
+                        <TextBlock DockPanel.Dock="Left" Text="{Binding Path=Name, Mode=OneWay}"/>
+                        <TextBlock TextAlignment="Right" DockPanel.Dock="Right" Text="{Binding Path=Price, Mode=OneWay}"/>
+                    </DockPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
 
     </DockPanel>
 </UserControl>

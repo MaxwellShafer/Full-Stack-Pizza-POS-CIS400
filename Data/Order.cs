@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,9 +13,67 @@ namespace PizzaParlor.Data
     /// <summary>
     /// a class containing the neccicary methods to create and order
     /// </summary>
-    public class Order : ICollection<IMenuItem>
+    public class Order : ICollection<IMenuItem>, INotifyPropertyChanged, INotifyCollectionChanged
 
     {
+        /// <summary>
+        /// Property Changed Event handler
+        /// </summary>
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+
+        /// <summary>
+        /// Collection changed event handler
+        /// </summary>
+        public event NotifyCollectionChangedEventHandler? CollectionChanged;
+
+
+        /// <summary>
+        /// holds the cumulative order
+        /// </summary>
+        private static int _cumOrder = 0;
+
+        /// <summary>
+        /// Static order number
+        /// </summary>
+        private int _number = 0;
+
+        /// <summary>
+        /// public property to get the order number
+        /// </summary>
+        public int Number
+        {
+            get
+            {
+                return _number;
+            }
+
+            init
+            {
+                _number = value;
+            }
+        }
+
+        /// <summary>
+        /// private backing field for datetime property
+        /// </summary>
+        private DateTime _dateTime = new();
+
+        /// <summary>
+        /// Keeps track of when the order was placed
+        /// </summary>
+        public DateTime PlacedAt
+        {
+            get
+            {
+                return _dateTime;
+            }
+            init
+            {
+                _dateTime = value;
+            }
+        }
+
         /// <summary>
         /// count property
         /// </summary>
@@ -35,6 +96,11 @@ namespace PizzaParlor.Data
         public void Add(IMenuItem item)
         {
             _order.Add(item);
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Count)));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Subtotal)));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Tax)));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Total)));
+            CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, item));
         }
 
         /// <summary>
@@ -43,6 +109,13 @@ namespace PizzaParlor.Data
         public void Clear()
         {
             _order.Clear();
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Count)));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Subtotal)));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Tax)));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Total)));
+            CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+
+
         }
 
         /// <summary>
@@ -84,7 +157,17 @@ namespace PizzaParlor.Data
         /// <returns>a bool if it was sucsessfull</returns>
         public bool Remove(IMenuItem item)
         {
-            return _order.Remove(item);
+            int index = _order.IndexOf(item);
+            if (index != -1)
+            {
+                _order.Remove(item);
+
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Count)));
+                CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, index));
+                return true;
+            }
+            return false;
+
         }
 
         /// <summary>
@@ -100,30 +183,66 @@ namespace PizzaParlor.Data
         /// calculates the subtotal of the order
         /// </summary>
         /// <returns>the subtotal</returns>
-        public decimal Subtotal()
+        public decimal Subtotal
         {
-            decimal total = 0;
-            foreach(IMenuItem item in _order)
+            get
             {
-                total += item.Price;
-            }
+                decimal total = 0;
+                foreach (IMenuItem item in _order)
+                {
+                    total += item.Price;
+                }
 
-            return total;
+                return total;
+            }
+            
         }
+
+        /// <summary>
+        /// private backing feild for taxrate
+        /// </summary>
+        private decimal _taxRate = .0915M;
 
         /// <summary>
         ///  the tax rate
         /// </summary>
-        public decimal TaxRate { get; set; } = .0915M;
+        public decimal TaxRate { get { return _taxRate; } 
+            
+            set 
+            {
+                _taxRate = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Count)));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Subtotal)));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Tax)));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Total)));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(TaxRate)));
+            } 
+        
+        }
 
         /// <summary>
         /// The total tax on the order
         /// </summary>
-        public decimal Tax => TaxRate * Subtotal();
+        public decimal Tax => TaxRate * Subtotal;
 
         /// <summary>
         /// Total cost of the order
         /// </summary>
-        public decimal Total => Tax + Subtotal();
+        public decimal Total
+        {
+            get
+            {   
+                return Tax + Subtotal;
+
+            }
+        }
+
+        public Order()
+        {
+            _cumOrder++;
+            Number = _cumOrder;
+            PlacedAt = DateTime.Now;
+        }
+
     }
 }

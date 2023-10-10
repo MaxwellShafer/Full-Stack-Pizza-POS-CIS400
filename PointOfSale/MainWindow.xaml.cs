@@ -28,7 +28,7 @@ namespace PizzaParlor.PointOfSale
         public MainWindow()
         { 
             InitializeComponent();
-            this.DataContext = new ObservableCollection<IMenuItem>();
+            this.DataContext = new Order();
         }
 
         

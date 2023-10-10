@@ -22,20 +22,20 @@
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
 
-        <TextBox Grid.Row="0" Grid.Column="0" TextAlignment="Center">Pizza:</TextBox>
+        <TextBlock Grid.Row="0" Grid.Column="0" TextAlignment="Center">Pizza:</TextBlock>
         <Button Grid.Row="1" Grid.Column="0" Click="AddPizzaClick">Build-Your-Own</Button>
         <Button Grid.Row="2" Grid.Column="0" Click="AddMeatPizzaClick">Meat Pizza</Button>
         <Button Grid.Row="3" Grid.Column="0" Click="AddVeggiePizzaClick">Veggie Pizza</Button>
         <Button Grid.Row="4" Grid.Column="0" Click="AddHawaiianPizzaClick"> Hawaiian Pizza</Button>
         <Button Grid.Row="5" Grid.Column="0" Click="AddSupremePizzaClick">Supreme Pizza</Button>
 
-        <TextBox Grid.Row="0" Grid.Column="1" TextAlignment="Center">Sides:</TextBox>
+        <TextBlock Grid.Row="0" Grid.Column="1" TextAlignment="Center">Sides:</TextBlock>
         <Button Grid.Row="1" Grid.Column="1" Click="AddWingsClick">Wings</Button>
         <Button Grid.Row="2" Grid.Column="1" Click="AddBreadSticksClick">BreadSticks</Button>
         <Button Grid.Row="3" Grid.Column="1" Click="AddGarlicKnotsClick">Garic Knots</Button>
         <Button Grid.Row="4" Grid.Column="1" Click="AddCinnamonSticksClick">Cinnamon Sticks</Button>
 
-        <TextBox Grid.Row="0" Grid.Column="2" TextAlignment="Center">Drink:</TextBox>
+        <TextBlock Grid.Row="0" Grid.Column="2" TextAlignment="Center">Drink:</TextBlock>
         <Button Grid.Row="1" Grid.Column="3" Click="AddSodaClick">Soda</Button>
         <Button Grid.Row="2" Grid.Column="3" Click="AddTeaClick">Iced Tea</Button>
        
