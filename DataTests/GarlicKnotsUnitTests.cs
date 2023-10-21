@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -40,7 +41,7 @@ namespace DataTests
         public void CountPropertyDefaultsTo8Test()
         {
             var garlicKnots = new GarlicKnots();
-            uint count = garlicKnots.Count;
+            uint count = garlicKnots.SideCount;
             Assert.Equal(8U, count);
         }
 
@@ -56,8 +57,8 @@ namespace DataTests
         public void CountPropertyEnforcesMinimumAndMaximumConstraintsTest(uint inputCount, uint expectedCount)
         {
             var garlicKnots = new GarlicKnots();
-            garlicKnots.Count = inputCount;
-            Assert.Equal(expectedCount, garlicKnots.Count);
+            garlicKnots.SideCount = inputCount;
+            Assert.Equal(expectedCount, garlicKnots.SideCount);
         }
 
         /// <summary>
@@ -94,7 +95,7 @@ namespace DataTests
         public void CaloriesTotalPropertyCalculatesCorrectlyTest(uint count, uint expectedCalories)
         {
             var garlicKnots = new GarlicKnots();
-            garlicKnots.Count = count;
+            garlicKnots.SideCount = count;
             Assert.Equal(expectedCalories, garlicKnots.CaloriesTotal);
         }
 
@@ -110,7 +111,7 @@ namespace DataTests
         public void SpecialInstructionsPropertyReturnsCorrectValueTest(uint count, string[] expectedInstructions)
         {
             var garlicKnots = new GarlicKnots();
-            garlicKnots.Count = count;
+            garlicKnots.SideCount = count;
 
             var instructions = garlicKnots.SpecialInstructions;
 
@@ -118,6 +119,16 @@ namespace DataTests
             {
                 Assert.Contains(expectedInstruction, instructions);
             }
+        }
+
+        /// <summary>
+        /// test if it implements properly
+        /// </summary>
+        [Fact]
+        public void ShouldImplementINotifyChanged()
+        {
+            GarlicKnots item = new();
+            Assert.IsAssignableFrom<INotifyPropertyChanged>(item);
         }
     }
 }

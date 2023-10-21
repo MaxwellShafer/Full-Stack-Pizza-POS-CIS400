@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -45,25 +46,26 @@ namespace DataTests
         }
 
         /// <summary>
-        /// verifies that the DrinkSize property defaults to Size.Sizes.Medium
+        /// verifies that the DrinkSize property defaults to Size.Medium
         /// </summary>
         [Fact]
         public void DrinkSizePropertyDefaultsToMedium()
         {
             var soda = new Soda();
-            Size.Sizes drinkSize = soda.DrinkSize;
-            Assert.Equal(Size.Sizes.Medium, drinkSize);
+            Size drinkSize = soda.DrinkSize;
+            Assert.Equal(Size.Medium, drinkSize);
         }
 
         /// <summary>
-        /// verifies that the DrinkType property defaults to SodaFlavor.SodaFlavors.Coke
+        /// verifies that the DrinkType property defaults to SodaFlavor
+        /// .Coke
         /// </summary>
         [Fact]
         public void DrinkTypePropertyDefaultsToCoke()
         {
             var soda = new Soda();
-            SodaFlavor.SodaFlavors drinkType = soda.DrinkType;
-            Assert.Equal(SodaFlavor.SodaFlavors.Coke, drinkType);
+            SodaFlavor drinkType = soda.DrinkType;
+            Assert.Equal(SodaFlavor.Coke, drinkType);
         }
 
         /// <summary>
@@ -110,6 +112,42 @@ namespace DataTests
             soda.Ice = false;
             var instructions = soda.SpecialInstructions;
             Assert.Contains("Hold Ice", instructions);
+        }
+
+        /// <summary>
+        /// notify property test
+        /// </summary>
+        /// <param name="size">the size</param>
+        /// <param name="propertyName">the property name</param>
+        [Theory]
+        [InlineData(Size.Small, "Price")]
+        [InlineData(Size.Medium, "Price")]
+        [InlineData(Size.Large, "Price")]
+        [InlineData(Size.Small, "CaloriesTotal")]
+        [InlineData(Size.Medium, "CaloriesTotal")]
+        [InlineData(Size.Large, "CaloriesTotal")]
+        [InlineData(Size.Small, "CaloriesPerEach")]
+        [InlineData(Size.Medium, "CaloriesPerEach")]
+        [InlineData(Size.Large, "CaloriesPerEach")]
+        [InlineData(Size.Small, "SpecialInstructions")]
+        [InlineData(Size.Medium, "SpecialInstructions")]
+        [InlineData(Size.Large, "SpecialInstructions")]
+        public void ChangingSizeShouldNotifyOfPropertyChanges(Size size, string propertyName)
+        {
+            Soda soda = new();
+            Assert.PropertyChanged(soda, propertyName, () => {
+                soda.DrinkSize = size;
+            });
+        }
+
+        /// <summary>
+        /// test if it implements properly
+        /// </summary>
+        [Fact]
+        public void ShouldImplementINotifyChanged()
+        {
+            Soda soda = new();
+            Assert.IsAssignableFrom<INotifyPropertyChanged>(soda);
         }
     }
 }

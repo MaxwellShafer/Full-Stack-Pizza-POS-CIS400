@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -41,7 +42,7 @@ namespace DataTests
         public void CountPropertyDefaultsTo8Test()
         {
             var cinnamonSticks = new CinnamonSticks();
-            uint count = cinnamonSticks.Count;
+            uint count = cinnamonSticks.SideCount;
             Assert.Equal(8U, count);
         }
 
@@ -57,8 +58,8 @@ namespace DataTests
         public void CountPropertyEnforcesMinimumAndMaximumConstraintsTest(uint inputCount, uint expectedCount)
         {
             var cinnamonSticks = new CinnamonSticks();
-            cinnamonSticks.Count = inputCount;
-            Assert.Equal(expectedCount, cinnamonSticks.Count);
+            cinnamonSticks.SideCount = inputCount;
+            Assert.Equal(expectedCount, cinnamonSticks.SideCount);
         }
 
         /// <summary>
@@ -80,7 +81,7 @@ namespace DataTests
         {
             var cinnamonSticks = new CinnamonSticks();
             decimal price = cinnamonSticks.Price;
-            Assert.Equal(0.9M, price);
+            Assert.Equal(0.9M * 8, price);
         }
 
         /// <summary>
@@ -113,7 +114,7 @@ namespace DataTests
         {
             var cinnamonSticks = new CinnamonSticks();
             cinnamonSticks.Frosting = frosting;
-            cinnamonSticks.Count = count;
+            cinnamonSticks.SideCount = count;
             Assert.Equal(expectedCalories, cinnamonSticks.CaloriesTotal);
         }
 
@@ -135,7 +136,7 @@ namespace DataTests
         public void SpecialInstructionsPropertyReturnsCorrectValueTest(uint count, bool frosting, params string[] expectedInstructions)
         {
             var cinnamonSticks = new CinnamonSticks();
-            cinnamonSticks.Count = count;
+            cinnamonSticks.SideCount = count;
             cinnamonSticks.Frosting = frosting;
 
             Assert.Equal(expectedInstructions.Length, cinnamonSticks.SpecialInstructions.Count());
@@ -145,5 +146,17 @@ namespace DataTests
                 Assert.Contains(expectedInstruction, cinnamonSticks.SpecialInstructions);
             }
         }
+
+
+        /// <summary>
+        /// test if it implements properly
+        /// </summary>
+        [Fact]
+        public void ShouldImplementINotifyChanged()
+        {
+            CinnamonSticks item = new();
+            Assert.IsAssignableFrom<INotifyPropertyChanged>(item);
+        }
+
     }
 }

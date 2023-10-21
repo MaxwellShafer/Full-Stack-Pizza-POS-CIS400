@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace PizzaParlor.Data
 {
     /// <summary>
@@ -96,6 +97,10 @@ namespace PizzaParlor.Data
         public void Add(IMenuItem item)
         {
             _order.Add(item);
+            if(item is INotifyPropertyChanged menuItem)
+            {
+                item.PropertyChanged += HandlePropertyChanged;
+            }
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Count)));
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Subtotal)));
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Tax)));
@@ -103,6 +108,7 @@ namespace PizzaParlor.Data
             CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, item));
         }
 
+       
         /// <summary>
         /// clears the order
         /// </summary>
@@ -244,5 +250,42 @@ namespace PizzaParlor.Data
             PlacedAt = DateTime.Now;
         }
 
+        /// <summary>
+        /// helps handle propertys changing
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">e</param>
+        public void HandlePropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            if(e.PropertyName != null)
+            {
+                //if (sender is Pizza pizza)
+                //{
+                   
+                //    CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, pizza));
+                    
+                    
+                //}
+                //if (sender is Sides side)
+                //{
+                    
+                //    CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, side));
+
+                //}
+                //if (sender is Drinks drink)
+                //{
+                    
+                //    CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, drink));
+
+                //}
+            }
+           
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(e.PropertyName));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Tax)));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Subtotal)));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Total)));
+
+            
+        }
     }
 }

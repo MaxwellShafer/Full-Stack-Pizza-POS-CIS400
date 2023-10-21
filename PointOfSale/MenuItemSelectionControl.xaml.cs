@@ -38,10 +38,15 @@ namespace PizzaParlor.PointOfSale
         /// <param name="e">e</param>
         public void AddPizzaClick(object sender, RoutedEventArgs e)
         {
-            if(DataContext is Order list)
+            if (this.VisualParent is System.Windows.Controls.Grid parent)
             {
-                Pizza p = new Pizza();
-                list.Add(p);
+                EditPizzaItem editPizzaControl = new();
+                parent.Children.Add(editPizzaControl);
+                foreach (MenuItemSelectionControl control in parent.Children.OfType<MenuItemSelectionControl>())
+                {
+                    control.Visibility = Visibility.Hidden;
+                }
+
             }
         }
 
@@ -52,10 +57,15 @@ namespace PizzaParlor.PointOfSale
         /// <param name="e">e</param>
         public void AddMeatPizzaClick(object sender, RoutedEventArgs e)
         {
-            if (DataContext is Order list)
+            if (this.VisualParent is System.Windows.Controls.Grid parent)
             {
-                MeatsPizza p = new MeatsPizza();
-                list.Add(p);
+                EditPizzaItem editPizzaControl = new();
+                parent.Children.Add(editPizzaControl);
+                foreach (MenuItemSelectionControl control in parent.Children.OfType<MenuItemSelectionControl>())
+                {
+                    control.Visibility = Visibility.Hidden;
+                }
+
             }
         }
 
@@ -66,10 +76,15 @@ namespace PizzaParlor.PointOfSale
         /// <param name="e">e</param>
         public void AddVeggiePizzaClick(object sender, RoutedEventArgs e)
         {
-            if (DataContext is Order list)
+            if (this.VisualParent is System.Windows.Controls.Grid parent)
             {
-                VeggiePizza p = new VeggiePizza();
-                list.Add(p);
+                EditPizzaItem editPizzaControl = new();
+                parent.Children.Add(editPizzaControl);
+                foreach (MenuItemSelectionControl control in parent.Children.OfType<MenuItemSelectionControl>())
+                {
+                    control.Visibility = Visibility.Hidden;
+                }
+
             }
         }
 
@@ -80,10 +95,15 @@ namespace PizzaParlor.PointOfSale
         /// <param name="e">e</param>
         public void AddHawaiianPizzaClick(object sender, RoutedEventArgs e)
         {
-            if (DataContext is Order list)
+            if (this.VisualParent is System.Windows.Controls.Grid parent)
             {
-                HawaiianPizza p = new HawaiianPizza();
-                list.Add(p);
+                EditPizzaItem editPizzaControl = new();
+                parent.Children.Add(editPizzaControl);
+                foreach (MenuItemSelectionControl control in parent.Children.OfType<MenuItemSelectionControl>())
+                {
+                    control.Visibility = Visibility.Hidden;
+                }
+
             }
         }
 
@@ -94,11 +114,15 @@ namespace PizzaParlor.PointOfSale
         /// <param name="e">e</param>
         public void AddSupremePizzaClick(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine("Supreme");
-            if (this.DataContext is Order list)
+            if (this.VisualParent is System.Windows.Controls.Grid parent)
             {
-                SupremePizza p = new SupremePizza();
-                list.Add(p);
+                EditPizzaItem editPizzaControl = new();
+                parent.Children.Add(editPizzaControl);
+                foreach (MenuItemSelectionControl control in parent.Children.OfType<MenuItemSelectionControl>())
+                {
+                    control.Visibility = Visibility.Hidden;
+                }
+
             }
         }
 
@@ -109,10 +133,15 @@ namespace PizzaParlor.PointOfSale
         /// <param name="e">e</param>
         public void AddWingsClick(object sender, RoutedEventArgs e)
         {
-            if (DataContext is Order list)
+            if (this.VisualParent is System.Windows.Controls.Grid parent)
             {
-                Wings item = new Wings();
-                list.Add(item);
+                EditWingControl wingControl = new();
+                parent.Children.Add(wingControl);
+                foreach (MenuItemSelectionControl control in parent.Children.OfType<MenuItemSelectionControl>())
+                {
+                    control.Visibility = Visibility.Hidden;
+                }
+
             }
         }
 
@@ -123,10 +152,15 @@ namespace PizzaParlor.PointOfSale
         /// <param name="e">e</param>
         public void AddBreadSticksClick(object sender, RoutedEventArgs e)
         {
-            if (DataContext is Order list)
+            if (this.VisualParent is System.Windows.Controls.Grid parent)
             {
-                Breadsticks item = new Breadsticks();
-                list.Add(item);
+                EditBreadstickControl stickControl = new();
+                parent.Children.Add(stickControl);
+                foreach (MenuItemSelectionControl control in parent.Children.OfType<MenuItemSelectionControl>())
+                {
+                    control.Visibility = Visibility.Hidden;
+                }
+
             }
         }
 
@@ -137,10 +171,16 @@ namespace PizzaParlor.PointOfSale
         /// <param name="e">e</param>
         public void AddGarlicKnotsClick(object sender, RoutedEventArgs e)
         {
-            if (DataContext is Order list)
+
+            if (this.VisualParent is System.Windows.Controls.Grid parent)
             {
-                GarlicKnots item = new GarlicKnots();
-                list.Add(item);
+                EditGarlicKnotsControl stickControl = new();
+                parent.Children.Add(stickControl);
+                foreach (MenuItemSelectionControl control in parent.Children.OfType<MenuItemSelectionControl>())
+                {
+                    control.Visibility = Visibility.Hidden;
+                }
+
             }
         }
 
@@ -152,10 +192,16 @@ namespace PizzaParlor.PointOfSale
         public void AddCinnamonSticksClick(object sender, RoutedEventArgs e)
         {
             if (DataContext is Order list)
-            {
-                CinnamonSticks item = new CinnamonSticks();
-                list.Add(item);
-            }
+                if (this.VisualParent is System.Windows.Controls.Grid parent)
+                {
+                    EditCinnamonSticks stickControl = new();
+                    parent.Children.Add(stickControl);
+                    foreach (MenuItemSelectionControl control in parent.Children.OfType<MenuItemSelectionControl>())
+                    {
+                        control.Visibility = Visibility.Hidden;
+                    }
+
+                }
         }
 
         /// <summary>
@@ -165,10 +211,15 @@ namespace PizzaParlor.PointOfSale
         /// <param name="e">e</param>
         public void AddSodaClick(object sender, RoutedEventArgs e)
         {
-            if (DataContext is Order list)
+            if (this.VisualParent is System.Windows.Controls.Grid parent)
             {
-                Soda item = new Soda();
-                list.Add(item);
+                EditSodaControl stickControl = new();
+                parent.Children.Add(stickControl);
+                foreach (MenuItemSelectionControl control in parent.Children.OfType<MenuItemSelectionControl>())
+                {
+                    control.Visibility = Visibility.Hidden;
+                }
+
             }
         }
 
@@ -179,10 +230,15 @@ namespace PizzaParlor.PointOfSale
         /// <param name="e">e</param>
         public void AddTeaClick(object sender, RoutedEventArgs e)
         {
-            if (DataContext is  Order list)
+            if (this.VisualParent is System.Windows.Controls.Grid parent)
             {
-                IcedTea item = new IcedTea();
-                list.Add(item);
+                EditIcedTeaControl stickControl = new();
+                parent.Children.Add(stickControl);
+                foreach (MenuItemSelectionControl control in parent.Children.OfType<MenuItemSelectionControl>())
+                {
+                    control.Visibility = Visibility.Hidden;
+                }
+
             }
         }
     }

@@ -6,16 +6,12 @@ using System.Threading.Tasks;
 
 namespace PizzaParlor.Data
 {
-    /// <summary>
-    /// a class containing a definition of an enum for soda flavors
-    /// </summary>
-    public class SodaFlavor 
-    {
+   
 
         /// <summary>
         /// an enum of soda flavors
         /// </summary>
-        public enum SodaFlavors
+        public enum SodaFlavor
         {
             Coke,
             DietCoke,
@@ -24,4 +20,4 @@ namespace PizzaParlor.Data
             RootBeer
         }
     }
-}
+

@@ -63,9 +63,9 @@ namespace DataTests
         {
             var wings = new Wings();
 
-            wings.Count = inputCount;
+            wings.SideCount = inputCount;
 
-            Assert.Equal(expectedCount, wings.Count);
+            Assert.Equal(expectedCount, wings.SideCount);
         }
 
         /// <summary>
@@ -76,13 +76,13 @@ namespace DataTests
         /// <param name="sauce">The type of sauce</param>
         /// <param name="expectedPrice">The expected price</param>
         [Theory]
-        [InlineData(true, 5, WingSauce.WingSauces.Medium, 7.5)]
-        [InlineData(false, 10, WingSauce.WingSauces.HoneyBBQ, 17.5)]
-        public void PricePropertyShouldReturnCorrectValueTest(bool boneIn, uint count, WingSauce.WingSauces sauce, decimal expectedPrice)
+        [InlineData(true, 5, WingSauce.Medium, 7.5)]
+        [InlineData(false, 10, WingSauce.HoneyBBQ, 17.5)]
+        public void PricePropertyShouldReturnCorrectValueTest(bool boneIn, uint count, WingSauce sauce, decimal expectedPrice)
         {
             var wings = new Wings();
             wings.BoneIn = boneIn;
-            wings.Count = count;
+            wings.SideCount = count;
             wings.Sauce = sauce;
 
             decimal price = wings.Price;
@@ -97,9 +97,9 @@ namespace DataTests
         /// <param name="sauce">The type of sauce</param>
         /// <param name="expectedCaloriesPerEach">The expected calories per each wing</param>
         [Theory]
-        [InlineData(true, WingSauce.WingSauces.Medium, 225)]
-        [InlineData(false, WingSauce.WingSauces.HoneyBBQ, 125)]
-        public void CaloriesPerEachPropertyShouldReturnCorrectValueTest(bool boneIn, WingSauce.WingSauces sauce, uint expectedCaloriesPerEach)
+        [InlineData(true, WingSauce.Medium, 225)]
+        [InlineData(false, WingSauce.HoneyBBQ, 125)]
+        public void CaloriesPerEachPropertyShouldReturnCorrectValueTest(bool boneIn, WingSauce sauce, uint expectedCaloriesPerEach)
         {
             var wings = new Wings();
             wings.BoneIn = boneIn;
@@ -118,13 +118,13 @@ namespace DataTests
         /// <param name="sauce">The type of sauce</param>
         /// <param name="expectedCaloriesTotal">The expected total calories</param>
         [Theory]
-        [InlineData(true, 5, WingSauce.WingSauces.Medium, 1125)]
-        [InlineData(false, 10, WingSauce.WingSauces.HoneyBBQ, 1250)]
-        public void CaloriesTotalPropertyShouldReturnCorrectValueTest(bool boneIn, uint count, WingSauce.WingSauces sauce, uint expectedCaloriesTotal)
+        [InlineData(true, 5, WingSauce.Medium, 1125)]
+        [InlineData(false, 10, WingSauce.HoneyBBQ, 1250)]
+        public void CaloriesTotalPropertyShouldReturnCorrectValueTest(bool boneIn, uint count, WingSauce sauce, uint expectedCaloriesTotal)
         {
             var wings = new Wings();
             wings.BoneIn = boneIn;
-            wings.Count = count;
+            wings.SideCount = count;
             wings.Sauce = sauce;
 
             uint caloriesTotal = wings.CaloriesTotal;
@@ -141,13 +141,13 @@ namespace DataTests
         /// <param name="expectedInstruction1">The first expected instruction</param>
         /// <param name="expectedInstruction2">The second expected instruction</param>
         [Theory]
-        [InlineData(true, 5, WingSauce.WingSauces.Medium, "5 Bone-In Wings", "Medium Sauce")]
-        [InlineData(false, 10, WingSauce.WingSauces.HoneyBBQ, "10 Boneless Wings", "HoneyBBQ Sauce")]
-        public void SpecialInstructionsPropertyShouldReturnCorrectValueTest(bool boneIn, uint count, WingSauce.WingSauces sauce, string expectedInstruction1, string expectedInstruction2)
+        [InlineData(true, 5, WingSauce.Medium, "5 Bone-In Wings", "Medium Sauce")]
+        [InlineData(false, 10, WingSauce.HoneyBBQ, "10 Boneless Wings", "HoneyBBQ Sauce")]
+        public void SpecialInstructionsPropertyShouldReturnCorrectValueTest(bool boneIn, uint count, WingSauce sauce, string expectedInstruction1, string expectedInstruction2)
         {
             var wings = new Wings();
             wings.BoneIn = boneIn;
-            wings.Count = count;
+            wings.SideCount = count;
             wings.Sauce = sauce;
 
             IEnumerable<string> specialInstructions = wings.SpecialInstructions;

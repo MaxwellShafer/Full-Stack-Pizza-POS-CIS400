@@ -29,8 +29,50 @@ namespace PizzaParlor.PointOfSale
         { 
             InitializeComponent();
             this.DataContext = new Order();
+
+
         }
 
-        
+        /// <summary>
+        /// handles back to menu button
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">e</param>
+        public void HandleBackToMenu(object sender, RoutedEventArgs e)
+        {
+            
+            
+                foreach (Grid grid in mainDock.Children.OfType<Grid>())
+                {
+                    foreach (MenuItemSelectionControl menuControl in grid.Children.OfType<MenuItemSelectionControl>())
+                    {
+                        menuControl.Visibility = Visibility.Visible;
+
+                    }
+
+                    foreach (UserControl orderControl in grid.Children.OfType<IEditOrder>())
+                    {
+                        
+                            orderControl.Visibility = Visibility.Hidden;
+                        
+                    }
+
+
+
+                }
+            
+           
+                
+            
+
+
+
+            
+
+
+        }
+
+
+
     }
 }

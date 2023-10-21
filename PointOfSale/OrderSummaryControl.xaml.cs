@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PizzaParlor.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,5 +28,46 @@ namespace PizzaParlor.PointOfSale
         {
             InitializeComponent();
         }
+
+        /// <summary>
+        /// edits an item in the order
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">the e</param>
+        public void HandleEditConrtrol(object sender, RoutedEventArgs e)
+        {
+            
+            if (this.VisualParent is DockPanel parent)
+            {
+                //if(VisualTreeHelper.GetParent(VisualTreeHelper.GetParent(VisualTreeHelper.GetParent(parent))) is DockPanel mainDock )
+                //{
+                    foreach (Grid grid in parent.Children.OfType<Grid>())
+                    {
+                        foreach (MenuItemSelectionControl menuControl in grid.Children.OfType<MenuItemSelectionControl>())
+                        {
+                            menuControl.Visibility = Visibility.Hidden;
+
+                        }
+
+                        foreach (UserControl orderControl in grid.Children.OfType<IEditOrder>())
+                        {
+                            if (orderControl.DataContext == ((Button)sender).DataContext)
+                            {
+                                orderControl.Visibility = Visibility.Visible;
+                            }
+                        }
+                           
+
+
+                    }
+            }
+
+
+                        
+               // }
+               
+
+        }
     }
 }
+

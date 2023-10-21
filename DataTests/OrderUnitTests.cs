@@ -41,10 +41,16 @@ namespace DataTests
             /// cal total
             /// </summary>
             public uint CaloriesTotal { get; set; }
+
             /// <summary>
             /// instrictions
             /// </summary>
             public IEnumerable<string> SpecialInstructions { get; set; }
+
+            /// <summary>
+            /// event handler
+            /// </summary>
+            public event PropertyChangedEventHandler? PropertyChanged;
         }
 
         /// <summary>

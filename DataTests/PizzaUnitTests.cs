@@ -1,6 +1,7 @@
 ﻿using PizzaParlor.Data;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -57,13 +58,13 @@ namespace DataTests
         /// <param name="topping2">topping2</param>
         /// <param name="topping3">topping3</param>
         [Theory]
-        [InlineData(Size.Sizes.Small, Crust.Crusts.Original, Topping.Sausage, Topping.Ham, Topping.Bacon, 10.99)]
-        [InlineData(Size.Sizes.Medium, Crust.Crusts.Original, Topping.Pineapple , Topping.Ham , Topping.Onions , 12.99)]
-        [InlineData(Size.Sizes.Large, Crust.Crusts.Original, Topping.Mushrooms , Topping.Peppers , Topping.Pepperoni , 14.99)]
-        [InlineData(Size.Sizes.Small, Crust.Crusts.DeepDish, Topping.Bacon , Topping.Pepperoni , Topping.Mushrooms , 11.99)]
-        [InlineData(Size.Sizes.Medium, Crust.Crusts.DeepDish, Topping.Pepperoni , Topping.Olives , Topping.Peppers , 13.99)]
-        [InlineData(Size.Sizes.Large, Crust.Crusts.DeepDish, Topping.Sausage , Topping.Pineapple , Topping.Pepperoni , 15.99)]
-        public void PricePropertyCalculatesCorrectly(Size.Sizes pizzaSize, Crust.Crusts crust, Topping topping1, Topping topping2, Topping topping3, decimal expectedPrice)
+        [InlineData(Size.Small, Crust.Original, Topping.Sausage, Topping.Ham, Topping.Bacon, 10.99)]
+        [InlineData(Size.Medium, Crust.Original, Topping.Pineapple , Topping.Ham , Topping.Onions , 12.99)]
+        [InlineData(Size.Large, Crust.Original, Topping.Mushrooms , Topping.Peppers , Topping.Pepperoni , 14.99)]
+        [InlineData(Size.Small, Crust.DeepDish, Topping.Bacon , Topping.Pepperoni , Topping.Mushrooms , 11.99)]
+        [InlineData(Size.Medium, Crust.DeepDish, Topping.Pepperoni , Topping.Olives , Topping.Peppers , 13.99)]
+        [InlineData(Size.Large, Crust.DeepDish, Topping.Sausage , Topping.Pineapple , Topping.Pepperoni , 15.99)]
+        public void PricePropertyCalculatesCorrectly(Size pizzaSize, Crust crust, Topping topping1, Topping topping2, Topping topping3, decimal expectedPrice)
         {
             var pizza = new Pizza
             {
@@ -90,13 +91,13 @@ namespace DataTests
         /// <param name="topping2">topping2</param>
         /// <param name="topping3">topping3</param>
         [Theory]
-        [InlineData(Size.Sizes.Small, Crust.Crusts.Original, Topping.Sausage, Topping.Ham, Topping.Bacon, 277U)]
-        [InlineData(Size.Sizes.Medium, Crust.Crusts.Original, Topping.Pineapple, Topping.Ham, Topping.Onions, 370U)]
-        [InlineData(Size.Sizes.Large, Crust.Crusts.Original, Topping.Mushrooms, Topping.Peppers, Topping.Pepperoni, 481U)]
-        [InlineData(Size.Sizes.Small, Crust.Crusts.DeepDish, Topping.Bacon, Topping.Pepperoni, Topping.Mushrooms, 315U)]
-        [InlineData(Size.Sizes.Medium, Crust.Crusts.DeepDish, Topping.Pepperoni, Topping.Olives, Topping.Peppers, 420U)]
-        [InlineData(Size.Sizes.Large, Crust.Crusts.DeepDish, Topping.Sausage, Topping.Pineapple, Topping.Pepperoni, 546U)]
-        public void CaloriesPerEachPropertyCalculatesCorrectly(Size.Sizes pizzaSize, Crust.Crusts crust, Topping topping1, Topping topping2, Topping topping3, uint expectedCalories)
+        [InlineData(Size.Small, Crust.Original, Topping.Sausage, Topping.Ham, Topping.Bacon, 277U)]
+        [InlineData(Size.Medium, Crust.Original, Topping.Pineapple, Topping.Ham, Topping.Onions, 370U)]
+        [InlineData(Size.Large, Crust.Original, Topping.Mushrooms, Topping.Peppers, Topping.Pepperoni, 481U)]
+        [InlineData(Size.Small, Crust.DeepDish, Topping.Bacon, Topping.Pepperoni, Topping.Mushrooms, 315U)]
+        [InlineData(Size.Medium, Crust.DeepDish, Topping.Pepperoni, Topping.Olives, Topping.Peppers, 420U)]
+        [InlineData(Size.Large, Crust.DeepDish, Topping.Sausage, Topping.Pineapple, Topping.Pepperoni, 546U)]
+        public void CaloriesPerEachPropertyCalculatesCorrectly(Size pizzaSize, Crust crust, Topping topping1, Topping topping2, Topping topping3, uint expectedCalories)
         {
             var pizza = new Pizza
             {
@@ -122,13 +123,13 @@ namespace DataTests
         /// <param name="topping2">topping2</param>
         /// <param name="topping3">topping3</param>
         [Theory]
-        [InlineData(Size.Sizes.Small, Crust.Crusts.Original, Topping.Sausage, Topping.Ham, Topping.Bacon, 2216U)]
-        [InlineData(Size.Sizes.Medium, Crust.Crusts.Original, Topping.Pineapple, Topping.Ham, Topping.Onions, 2960U)]
-        [InlineData(Size.Sizes.Large, Crust.Crusts.Original, Topping.Mushrooms, Topping.Peppers, Topping.Pepperoni, 3848U)]
-        [InlineData(Size.Sizes.Small, Crust.Crusts.DeepDish, Topping.Bacon, Topping.Pepperoni, Topping.Mushrooms, 2520U)]
-        [InlineData(Size.Sizes.Medium, Crust.Crusts.DeepDish, Topping.Pepperoni, Topping.Olives, Topping.Peppers, 3360U)]
-        [InlineData(Size.Sizes.Large, Crust.Crusts.DeepDish, Topping.Sausage, Topping.Pineapple, Topping.Pepperoni, 4368U)]
-        public void CaloriesTotalPropertyCalculatesCorrectly(Size.Sizes pizzaSize, Crust.Crusts crust, Topping topping1, Topping topping2, Topping topping3, uint expectedCalories)
+        [InlineData(Size.Small, Crust.Original, Topping.Sausage, Topping.Ham, Topping.Bacon, 2216U)]
+        [InlineData(Size.Medium, Crust.Original, Topping.Pineapple, Topping.Ham, Topping.Onions, 2960U)]
+        [InlineData(Size.Large, Crust.Original, Topping.Mushrooms, Topping.Peppers, Topping.Pepperoni, 3848U)]
+        [InlineData(Size.Small, Crust.DeepDish, Topping.Bacon, Topping.Pepperoni, Topping.Mushrooms, 2520U)]
+        [InlineData(Size.Medium, Crust.DeepDish, Topping.Pepperoni, Topping.Olives, Topping.Peppers, 3360U)]
+        [InlineData(Size.Large, Crust.DeepDish, Topping.Sausage, Topping.Pineapple, Topping.Pepperoni, 4368U)]
+        public void CaloriesTotalPropertyCalculatesCorrectly(Size pizzaSize, Crust crust, Topping topping1, Topping topping2, Topping topping3, uint expectedCalories)
         {
             var pizza = new Pizza
             {
@@ -156,13 +157,13 @@ namespace DataTests
         /// <param name="expectedInstructions">what we expect the instuctions to look like.</param>
 
         [Theory]
-        [InlineData(Size.Sizes.Small, Crust.Crusts.Original, Topping.Sausage, Topping.Ham, Topping.Bacon, new string[] { "Small", "Original Crust", "Add Sausage", "Add Bacon", "Add Ham" })]
-        [InlineData(Size.Sizes.Medium, Crust.Crusts.Thin, Topping.Pineapple, Topping.Ham, Topping.Onions, new string[] { "Medium", "Thin Crust", "Add Pineapple", "Add Ham", "Add Onions" })]
-        [InlineData(Size.Sizes.Large, Crust.Crusts.DeepDish, Topping.Mushrooms, Topping.Peppers, Topping.Pepperoni, new string[] { "Large", "Deep Dish", "Add Mushrooms", "Add Peppers", "Add Pepperoni" })]
-        [InlineData(Size.Sizes.Small, Crust.Crusts.Original, Topping.Bacon, Topping.Pepperoni, Topping.Mushrooms, new string[] { "Small", "Original Crust", "Add Pepperoni", "Add Bacon", "Add Mushrooms" })]
-        [InlineData(Size.Sizes.Medium, Crust.Crusts.Thin, Topping.Pepperoni, Topping.Olives, Topping.Peppers, new string[] { "Medium", "Thin Crust", "Add Pepperoni", "Add Peppers", "Add Olives" })]
-        [InlineData(Size.Sizes.Large, Crust.Crusts.DeepDish, Topping.Sausage, Topping.Pineapple, Topping.Pepperoni, new string[] { "Large", "Deep Dish", "Add Sausage", "Add Pineapple", "Add Pepperoni" })]
-        public void SpecialInstructionsContainsCorrectValues(Size.Sizes pizzaSize, Crust.Crusts crust, Topping topping1, Topping topping2, Topping topping3, string[] expectedInstructions)
+        [InlineData(Size.Small, Crust.Original, Topping.Sausage, Topping.Ham, Topping.Bacon, new string[] { "Small", "Original Crust", "Add Sausage", "Add Bacon", "Add Ham" })]
+        [InlineData(Size.Medium, Crust.Thin, Topping.Pineapple, Topping.Ham, Topping.Onions, new string[] { "Medium", "Thin Crust", "Add Pineapple", "Add Ham", "Add Onions" })]
+        [InlineData(Size.Large, Crust.DeepDish, Topping.Mushrooms, Topping.Peppers, Topping.Pepperoni, new string[] { "Large", "Deep Dish", "Add Mushrooms", "Add Peppers", "Add Pepperoni" })]
+        [InlineData(Size.Small, Crust.Original, Topping.Bacon, Topping.Pepperoni, Topping.Mushrooms, new string[] { "Small", "Original Crust", "Add Pepperoni", "Add Bacon", "Add Mushrooms" })]
+        [InlineData(Size.Medium, Crust.Thin, Topping.Pepperoni, Topping.Olives, Topping.Peppers, new string[] { "Medium", "Thin Crust", "Add Pepperoni", "Add Peppers", "Add Olives" })]
+        [InlineData(Size.Large, Crust.DeepDish, Topping.Sausage, Topping.Pineapple, Topping.Pepperoni, new string[] { "Large", "Deep Dish", "Add Sausage", "Add Pineapple", "Add Pepperoni" })]
+        public void SpecialInstructionsContainsCorrectValues(Size pizzaSize, Crust crust, Topping topping1, Topping topping2, Topping topping3, string[] expectedInstructions)
         {
             var pizza = new Pizza
             {
@@ -182,8 +183,44 @@ namespace DataTests
             }
         }
 
+        /// <summary>
+        /// notify property test
+        /// </summary>
+        /// <param name="size">the size</param>
+        /// <param name="propertyName">the property name</param>
+        [Theory]
+        [InlineData(Size.Small, "PizzaSize")]
+        [InlineData(Size.Medium, "PizzaSize")]
+        [InlineData(Size.Large, "PizzaSize")]
+        [InlineData(Size.Small, "Price")]
+        [InlineData(Size.Medium, "Price")]
+        [InlineData(Size.Large, "Price")]
+        [InlineData(Size.Small, "CaloriesTotal")]
+        [InlineData(Size.Medium, "CaloriesTotal")]
+        [InlineData(Size.Large, "CaloriesTotal")]
+        [InlineData(Size.Small, "CaloriesPerEach")]
+        [InlineData(Size.Medium, "CaloriesPerEach")]
+        [InlineData(Size.Large, "CaloriesPerEach")]
+        [InlineData(Size.Small, "SpecialInstructions")]
+        [InlineData(Size.Medium, "SpecialInstructions")]
+        [InlineData(Size.Large, "SpecialInstructions")]
+        public void ChangingSizeShouldNotifyOfPropertyChanges(Size size, string propertyName)
+        {
+            Pizza pizza = new();
+            Assert.PropertyChanged(pizza, propertyName, () => {
+                pizza.PizzaSize = size;
+            });
+        }
 
-
+        /// <summary>
+        /// test if it implements properly
+        /// </summary>
+        [Fact]
+        public void ShouldImplementINotifyChanged()
+        {
+            Pizza pizza = new();
+            Assert.IsAssignableFrom<INotifyPropertyChanged>(pizza);
+        }
 
     }
 }

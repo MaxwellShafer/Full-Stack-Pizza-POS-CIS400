@@ -27,10 +27,27 @@ namespace PizzaParlor.Data
         override public bool Ice { get; set; } = true;
 
         /// <summary>
-        /// Size representing the size of the iced tea 
+        /// private backing field
         /// </summary>
-        override public Size.Sizes DrinkSize { get; set; } = Size.Sizes.Medium;
-
+        private Size _size = Size.Medium;
+        /// <summary>
+        /// Size representing the size of the soda
+        /// </summary>
+        override public Size DrinkSize
+        {
+            get
+            {
+                return _size;
+            }
+            set
+            {
+                _size = value;
+                OnPropertyChanged(nameof(Price));
+                OnPropertyChanged(nameof(CaloriesPerEach));
+                OnPropertyChanged(nameof(CaloriesTotal));
+                OnPropertyChanged(nameof(SpecialInstructions));
+            }
+        }
         /// <summary>
         /// decimal representing the price of the iced tea.
         /// </summary>
@@ -38,9 +55,9 @@ namespace PizzaParlor.Data
         {
             get
             {
-                if (DrinkSize == Size.Sizes.Small) return 2.00m;
-                if (DrinkSize == Size.Sizes.Medium) return 2.50m;
-                if (DrinkSize == Size.Sizes.Large) return 3.00m;
+                if (DrinkSize == Size.Small) return 2.00m;
+                if (DrinkSize == Size.Medium) return 2.50m;
+                if (DrinkSize == Size.Large) return 3.00m;
                 return 0m;
             }
         }
@@ -52,9 +69,9 @@ namespace PizzaParlor.Data
         {
             get
             {
-                if (DrinkSize == Size.Sizes.Small) return 175;
-                if (DrinkSize == Size.Sizes.Medium) return 220;
-                if (DrinkSize == Size.Sizes.Large) return 275;
+                if (DrinkSize == Size.Small) return 175;
+                if (DrinkSize == Size.Medium) return 220;
+                if (DrinkSize == Size.Large) return 275;
                 return 0;
             }
         }
@@ -87,9 +104,9 @@ namespace PizzaParlor.Data
         {
             get
             {
-                if (DrinkSize == Size.Sizes.Small) return 175;
-                if (DrinkSize == Size.Sizes.Medium) return 220;
-                if (DrinkSize == Size.Sizes.Large) return 275;
+                if (DrinkSize == Size.Small) return 175;
+                if (DrinkSize == Size.Medium) return 220;
+                if (DrinkSize == Size.Large) return 275;
                 return 0;
             }
         }
@@ -101,9 +118,9 @@ namespace PizzaParlor.Data
         {
             get
             {
-                if (DrinkSize == Size.Sizes.Small) return 175;
-                if (DrinkSize == Size.Sizes.Medium) return 220;
-                if (DrinkSize == Size.Sizes.Large) return 275;
+                if (DrinkSize == Size.Small) return 175;
+                if (DrinkSize == Size.Medium) return 220;
+                if (DrinkSize == Size.Large) return 275;
                 return 0;
             }
         }

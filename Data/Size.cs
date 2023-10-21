@@ -6,15 +6,11 @@ using System.Threading.Tasks;
 
 namespace PizzaParlor.Data
 {
-    /// <summary>
-    /// A class containing a definition for a soda enum
-    /// </summary>
-    public class Size
-    {
+  
         /// <summary>
         /// the three sizes of pizza
         /// </summary>
-        public enum Sizes
+        public enum Size
         {
             Small,
             Medium,
@@ -22,5 +18,5 @@ namespace PizzaParlor.Data
         }
 
 
-    }
 }
+

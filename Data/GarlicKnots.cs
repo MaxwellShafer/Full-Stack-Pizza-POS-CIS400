@@ -9,7 +9,7 @@ namespace PizzaParlor.Data
     /// <summary>
     /// A class containing data for Garlic Knots
     /// </summary>
-    public class GarlicKnots :Sides, IMenuItem
+    public class GarlicKnots : Sides, IMenuItem
     {
         /// <summary>
         /// gets the name of the garlic knots
@@ -29,7 +29,7 @@ namespace PizzaParlor.Data
         /// <summary>
         /// gets or sets the count of wings. Defaults to 8, maximum of 12.
         /// </summary>
-        override public uint Count
+        override public uint SideCount
         {
 
             get
@@ -42,6 +42,12 @@ namespace PizzaParlor.Data
                 if (value >= 4 && value <= 12)
                 {
                     _count = value;
+
+                    OnPropertyChanged(nameof(SideCount));
+                    OnPropertyChanged(nameof(Price));
+                    OnPropertyChanged(nameof(CaloriesPerEach));
+                    OnPropertyChanged(nameof(CaloriesTotal));
+                    OnPropertyChanged(nameof(SpecialInstructions));
                 }
             }
         }
@@ -49,7 +55,7 @@ namespace PizzaParlor.Data
         /// <summary>
         /// gets the price of each garlic knot. $0.75 each
         /// </summary>
-        override public decimal Price => 0.75M * Count;
+        override public decimal Price => 0.75M * SideCount;
 
         /// <summary>
         /// gets the calories per each garlic knot. 175
@@ -59,7 +65,7 @@ namespace PizzaParlor.Data
         /// <summary>
         /// gets the total number of calories in all garlic knots, considering the count.
         /// </summary>
-        override public uint CaloriesTotal => CaloriesPerEach * Count;
+        override public uint CaloriesTotal => CaloriesPerEach * SideCount;
 
         /// <summary>
         /// gets special instructions for the garlic knots based on the count.
@@ -68,7 +74,7 @@ namespace PizzaParlor.Data
         {
             get
             {
-                yield return $"{Count} Garlic Knots";
+                yield return $"{SideCount} Garlic Knots";
             }
         }
 

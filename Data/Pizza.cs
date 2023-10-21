@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,22 @@ namespace PizzaParlor.Data
     /// </summary>
     public class Pizza : IMenuItem
     {
+
+        /// <summary>
+        /// event handler
+        /// </summary>
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+
+        /// <summary>
+        /// helper method
+        /// </summary>
+        /// <param name="propertyName">the property name</param>
+        public virtual void OnPropertyChanged(string propertyName)
+        {
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
         /// <summary>
         /// A Name property
         /// </summary>
@@ -28,14 +45,54 @@ namespace PizzaParlor.Data
         public uint Slices { get; } = 8;
 
         /// <summary>
-        /// The size of the pizza
+        /// private backing feild
         /// </summary>
-        virtual public Size.Sizes PizzaSize { get; set; } = Size.Sizes.Medium;
+        private Size _pizzaSize = Size.Medium;
 
         /// <summary>
-        /// The pizza Crust type
+        /// The size of the pizza
         /// </summary>
-        virtual public Crust.Crusts PizzaCrust { get; set; } = Crust.Crusts.Original;
+        virtual public Size PizzaSize
+        {
+            get
+            {
+                return _pizzaSize;
+            }
+            set
+            {
+                _pizzaSize = value; 
+                OnPropertyChanged(nameof(PizzaSize));
+                OnPropertyChanged(nameof(Price));
+                OnPropertyChanged(nameof(CaloriesPerEach));
+                OnPropertyChanged(nameof(CaloriesTotal));
+                OnPropertyChanged(nameof(SpecialInstructions));
+            }
+        }
+
+        /// <summary>
+        /// private backing feild
+        /// </summary>
+        private Crust _pizzaCrust = Crust.Original;
+
+        /// <summary>
+        /// The size of the pizza
+        /// </summary>
+        virtual public Crust PizzaCrust
+        {
+            get
+            {
+                return _pizzaCrust;
+            }
+            set
+            {
+                _pizzaCrust = value;
+                OnPropertyChanged(nameof(PizzaCrust));
+                OnPropertyChanged(nameof(Price));
+                OnPropertyChanged(nameof(CaloriesPerEach));
+                OnPropertyChanged(nameof(CaloriesTotal));
+                OnPropertyChanged(nameof(SpecialInstructions));
+            }
+        }
 
         /// <summary>
         /// A list of the possible toppings
@@ -51,19 +108,19 @@ namespace PizzaParlor.Data
             {
                 decimal price = 0M;
 
-                if(PizzaSize == Size.Sizes.Small)
+                if(PizzaSize == Size.Small)
                 {
                     price = 7.99M;
                 }
-                if (PizzaSize == Size.Sizes.Medium)
+                if (PizzaSize == Size.Medium)
                 {
                     price = 9.99M;
                 }
-                if (PizzaSize == Size.Sizes.Large)
+                if (PizzaSize == Size.Large)
                 {
                     price = 11.99M;
                 }
-                if(PizzaCrust == Crust.Crusts.DeepDish)
+                if(PizzaCrust == Crust.DeepDish)
                 {
                     price += 1.00M;
                 }
@@ -87,15 +144,15 @@ namespace PizzaParlor.Data
             get
             {
                 uint cal = 0;
-                if(PizzaCrust == Crust.Crusts.Thin)
+                if(PizzaCrust == Crust.Thin)
                 {
                     cal = 150;
                 }
-                if (PizzaCrust == Crust.Crusts.Original)
+                if (PizzaCrust == Crust.Original)
                 {
                     cal = 250;
                 }
-                if (PizzaCrust == Crust.Crusts.DeepDish)
+                if (PizzaCrust == Crust.DeepDish)
                 {
                     cal = 300;
                 }
@@ -105,11 +162,11 @@ namespace PizzaParlor.Data
                     cal += t.BaseCalories;
                 }
 
-                if (PizzaSize == Size.Sizes.Small)
+                if (PizzaSize == Size.Small)
                 {
                     cal = (uint)(cal * .75);
                 }
-                if (PizzaSize == Size.Sizes.Large)
+                if (PizzaSize == Size.Large)
                 {
                     cal = (uint)(cal * 1.3);
                 }
@@ -132,28 +189,28 @@ namespace PizzaParlor.Data
             {
                 List<string> instructions = new();
 
-                if (PizzaSize == Size.Sizes.Small)
+                if (PizzaSize == Size.Small)
                 {
                     instructions.Add("Small");
                 }
-                if (PizzaSize == Size.Sizes.Medium)
+                if (PizzaSize == Size.Medium)
                 {
                     instructions.Add("Medium");
                 }
-                if (PizzaSize == Size.Sizes.Large)
+                if (PizzaSize == Size.Large)
                 {
                     instructions.Add("Large");
                 }
 
-                if (PizzaCrust == Crust.Crusts.Thin)
+                if (PizzaCrust == Crust.Thin)
                 {
                     instructions.Add("Thin Crust");
                 }
-                if (PizzaCrust == Crust.Crusts.Original)
+                if (PizzaCrust == Crust.Original)
                 {
                     instructions.Add("Original Crust");
                 }
-                if (PizzaCrust == Crust.Crusts.DeepDish)
+                if (PizzaCrust == Crust.DeepDish)
                 {
                     instructions.Add("Deep Dish");
                 }

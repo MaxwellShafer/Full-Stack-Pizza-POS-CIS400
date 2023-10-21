@@ -1,3 +1,5 @@
+using System.ComponentModel;
+
 namespace DataTests
 {
     /// <summary>
@@ -46,9 +48,9 @@ namespace DataTests
         {
             var breadsticks = new Breadsticks();
 
-            breadsticks.Count = inputCount;
+            breadsticks.SideCount = inputCount;
 
-            Assert.Equal(expectedCount, breadsticks.Count);
+            Assert.Equal(expectedCount, breadsticks.SideCount);
         }
 
         /// <summary>
@@ -64,9 +66,9 @@ namespace DataTests
         {
             var breadsticks = new Breadsticks();
 
-            breadsticks.Count = inputCount;
+            breadsticks.SideCount = inputCount;
 
-            Assert.Equal(expectedCount, breadsticks.Count);
+            Assert.Equal(expectedCount, breadsticks.SideCount);
         }
 
         /// <summary>
@@ -92,7 +94,7 @@ namespace DataTests
 
             decimal price = breadsticks.Price;
 
-            Assert.Equal(0.75M * breadsticks.Count, price);
+            Assert.Equal(0.75M * breadsticks.SideCount, price);
         }
 
         /// <summary>
@@ -107,7 +109,7 @@ namespace DataTests
             decimal price = breadsticks.Price;
             
 
-            Assert.Equal(1M * breadsticks.Count, price);
+            Assert.Equal(1M * breadsticks.SideCount, price);
         }
 
         /// <summary>
@@ -141,7 +143,7 @@ namespace DataTests
         public void CaloriesTotalPropertyShouldReturnCorrectValueTest(bool cheese, uint count, uint expectedCalories)
         {
             var breadsticks = new Breadsticks();
-            breadsticks.Count = count;
+            breadsticks.SideCount = count;
             breadsticks.Cheese = cheese;
 
             uint caloriesTotal = breadsticks.CaloriesTotal;
@@ -167,11 +169,21 @@ namespace DataTests
         public void SpecialInstructionsPropertyShouldReturnCorrectValueTest(bool cheese, uint count, string expectedInstructions)
         {
             var breadsticks = new Breadsticks();
-            breadsticks.Count = count;
+            breadsticks.SideCount = count;
             breadsticks.Cheese = cheese;
 
 
             Assert.Equal(expectedInstructions, breadsticks.SpecialInstructions.First());
+        }
+
+        /// <summary>
+        /// test if it implements properly
+        /// </summary>
+        [Fact]
+        public void ShouldImplementINotifyChanged()
+        {
+            Breadsticks item = new();
+            Assert.IsAssignableFrom<INotifyPropertyChanged>(item);
         }
     }
 }

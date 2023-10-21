@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,7 +30,7 @@ namespace PizzaParlor.Data
         /// <summary>
         /// gets or sets the count of wings. Defaults to 8, maximum of 12.
         /// </summary>
-        override public uint Count
+        override public uint SideCount
         {
 
             get
@@ -42,24 +43,66 @@ namespace PizzaParlor.Data
                 if (value >= 4 && value <= 12)
                 {
                     _count = value;
+                    OnPropertyChanged(nameof(SideCount));
+                    OnPropertyChanged(nameof(Price));
+                    OnPropertyChanged(nameof(CaloriesPerEach));
+                    OnPropertyChanged(nameof(CaloriesTotal));
+                    OnPropertyChanged(nameof(SpecialInstructions));
                 }
             }
         }
 
         /// <summary>
+        /// private backing field
+        /// </summary>
+
+        private bool _bone = true;
+        /// <summary>
         /// gets or sets a value indicating whether the wings are bone in. Defaults to true.
         /// </summary>
-        public bool BoneIn { get; set; } = true;
+        public bool BoneIn
+        {
+            get
+            {
+                return _bone;
+            }
+            set
+            {
+                _bone = value;
+                OnPropertyChanged(nameof(CaloriesPerEach));
+                OnPropertyChanged(nameof(CaloriesTotal));
+                OnPropertyChanged(nameof(Price));
+                OnPropertyChanged(nameof(SpecialInstructions));
 
+            }
+        }
+        /// <summary>
+        /// private backing field
+        /// </summary>
+        
+        WingSauce _sauce = WingSauce.Medium;
         /// <summary>
         /// gets or sets a and enum depending on the sauce
         /// </summary>
-        public WingSauce.WingSauces Sauce { get; set; } = WingSauce.WingSauces.Medium;
+        public WingSauce Sauce
+        {
+            get
+            {
+                return _sauce;
+            }
+            set
+            {
+                _sauce = value;
+                OnPropertyChanged(nameof(CaloriesPerEach));
+                OnPropertyChanged(nameof(CaloriesTotal));
+                OnPropertyChanged(nameof(SpecialInstructions));
+            }
+        }
 
         /// <summary>
         /// gets the price of the wings
         /// </summary>
-        override public decimal Price => (BoneIn ? ( (decimal)Count * (decimal)1.5) :((decimal)Count * (decimal)1.75));
+        override public decimal Price => (BoneIn ? ( (decimal)SideCount * (decimal)1.5) :((decimal)SideCount * (decimal)1.75));
 
         /// <summary>
         /// gets the calories per each wing ,
@@ -69,7 +112,7 @@ namespace PizzaParlor.Data
             get
             {
 
-                if (Sauce.Equals(WingSauce.WingSauces.HoneyBBQ))
+                if (Sauce.Equals(WingSauce.HoneyBBQ))
                 {
                     return 125U + (BoneIn ? 50U : 0U);
                 }
@@ -83,7 +126,7 @@ namespace PizzaParlor.Data
         /// <summary>
         /// gets the total number of calories of the wings
         /// </summary>
-        override public uint CaloriesTotal => CaloriesPerEach * Count;
+        override public uint CaloriesTotal => CaloriesPerEach * SideCount;
 
         /// <summary>
         /// gets special instructions for the wings
@@ -93,10 +136,10 @@ namespace PizzaParlor.Data
             get
             {
                 if (BoneIn)
-                { yield return Count.ToString() + " Bone-In Wings"; }
+                { yield return SideCount.ToString() + " Bone-In Wings"; }
                 else
                 {
-                    yield return Count.ToString() + " Boneless Wings";
+                    yield return SideCount.ToString() + " Boneless Wings";
                 }
 
                 yield return Sauce.ToString() + " Sauce";

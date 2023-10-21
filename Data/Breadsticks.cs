@@ -29,7 +29,7 @@ namespace PizzaParlor.Data
         /// <summary>
         /// gets or sets the count of breadsticks. Defaults to 8, maximum of 12.
         /// </summary>
-        override public uint Count { 
+        override public uint SideCount { 
             
             get {
                 return _count;
@@ -40,6 +40,12 @@ namespace PizzaParlor.Data
                 if (value >= 4 && value <= 12)
                 {
                     _count = value;
+
+                    OnPropertyChanged(nameof(SideCount));
+                    OnPropertyChanged(nameof(Price));
+                    OnPropertyChanged(nameof(CaloriesPerEach));
+                    OnPropertyChanged(nameof(CaloriesTotal));
+                    OnPropertyChanged(nameof(SpecialInstructions));
                 }
 
             }
@@ -47,9 +53,29 @@ namespace PizzaParlor.Data
         }
 
         /// <summary>
+        /// private backing feild
+        /// </summary>
+        private bool _cheese = false;
+
+        /// <summary>
         /// gets or sets a value indicating whether the breadsticks have cheese. Defaults to false.
         /// </summary>
-        public bool Cheese { get; set; } = false;
+        public bool Cheese
+        {
+            get
+            {
+                return _cheese;
+            }
+
+            set
+            {
+                _cheese = value;
+                OnPropertyChanged(nameof(Price));
+                OnPropertyChanged(nameof(CaloriesPerEach));
+                OnPropertyChanged(nameof(CaloriesTotal));
+                OnPropertyChanged(nameof(SpecialInstructions));
+            }
+        }
 
         /// <summary>
         /// gets the price of each breadstick. $0.75 each for plain breadsticks, $1.00 for cheesesticks.
@@ -59,11 +85,11 @@ namespace PizzaParlor.Data
             {
                 if (Cheese)
                 {
-                    return 1M* Count;
+                    return 1M* SideCount;
                 }
                 else
                 {
-                    return .75M * Count;
+                    return .75M * SideCount;
                 }
             }
         }
@@ -76,7 +102,7 @@ namespace PizzaParlor.Data
         /// <summary>
         /// gets the total number of calories in all breadsticks, considering the count and type (cheesesticks or plain breadsticks).
         /// </summary>
-        override public uint CaloriesTotal =>  CaloriesPerEach * Count;
+        override public uint CaloriesTotal => CaloriesPerEach * SideCount;
 
         /// <summary>
         /// gets special instructions for the breadsticks based on the count and type (cheesesticks or plain breadsticks).
@@ -89,12 +115,12 @@ namespace PizzaParlor.Data
 
                 if (Cheese)
                 {
-                    instructions.Add($"{Count} Cheesesticks");
+                    instructions.Add($"{SideCount} Cheesesticks");
                 }
 
                 else
                 {
-                    instructions.Add($"{Count} Breadsticks");
+                    instructions.Add($"{SideCount} Breadsticks");
                     
                 }
 

@@ -28,7 +28,7 @@ namespace PizzaParlor.Data
         /// <summary>
         /// gets or sets the count of wings. Defaults to 8, maximum of 12.
         /// </summary>
-        override public uint Count
+        override public uint SideCount
         {
 
             get
@@ -41,15 +41,40 @@ namespace PizzaParlor.Data
                 if (value >= 4 && value <= 12)
                 {
                     _count = value;
+                    OnPropertyChanged(nameof(SideCount));
+                    OnPropertyChanged(nameof(Price));
+                    OnPropertyChanged(nameof(CaloriesPerEach));
+                    OnPropertyChanged(nameof(CaloriesTotal));
+                    OnPropertyChanged(nameof(SpecialInstructions));
                 }
                 
             }
         }
 
         /// <summary>
+        /// private backing field
+        /// </summary>
+        private bool _frosting = true;
+        /// <summary>
         /// gets or sets a value indicating whether the cinnamon sticks have frosting. Defaults to true.
         /// </summary>
-        public bool Frosting { get; set; } = true;
+        public bool Frosting
+        {
+            get
+            {
+                return _frosting;
+            }
+
+            set
+            {
+                _frosting = value;
+               
+                OnPropertyChanged(nameof(Price));
+                OnPropertyChanged(nameof(CaloriesPerEach));
+                OnPropertyChanged(nameof(CaloriesTotal));
+                OnPropertyChanged(nameof(SpecialInstructions));
+            }
+        }
 
         /// <summary>
         /// gets the price of each cinnamon stick. $0.75 each for plain cinnamon sticks, $0.90 each with frosting.
@@ -59,11 +84,11 @@ namespace PizzaParlor.Data
             {
                 if (Frosting)
                 {
-                    return .9M;
+                    return .9M * SideCount;
                 }
                 else
                 {
-                    return .75M;
+                    return .75M * SideCount ;
                 }
             }
         }
@@ -88,7 +113,7 @@ namespace PizzaParlor.Data
         /// <summary>
         /// gets the total number of calories in all cinnamon sticks, considering the count and frosting.
         /// </summary>
-        override public uint CaloriesTotal => CaloriesPerEach * Count;
+        override public uint CaloriesTotal => CaloriesPerEach * SideCount;
 
         /// <summary>
         /// gets special instructions for the cinnamon sticks based on the count and frosting.
@@ -97,7 +122,7 @@ namespace PizzaParlor.Data
         {
             get
             {
-                yield return $"{Count} Cinnamon Sticks";
+                yield return $"{SideCount} Cinnamon Sticks";
                 if (!Frosting)
                     yield return "Hold Frosting";
             }

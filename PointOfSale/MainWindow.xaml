@@ -23,15 +23,19 @@
             <Setter Property="TextAlignment" Value="Center"/>
         </Style>
     </Window.Resources>
-    <DockPanel>
-        <DockPanel DockPanel.Dock="Left" Width="720" Height="690">
-            <local:MenuItemSelectionControl DockPanel.Dock="Top" Height="600"/>
-            <DockPanel DockPanel.Dock="Bottom" Margin="15">
+    <DockPanel x:Name="mainDock" >
+        <Grid DockPanel.Dock="Left" Width="720" Height="690">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="9*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <local:MenuItemSelectionControl x:Name="MenuControl" Grid.Row="0" Height="600"/>
+            <DockPanel Grid.Row="1">
                 <Button>Cancel Order</Button>
-                <Button>Back to Menu</Button>
+                <Button Click="HandleBackToMenu">Back to Menu</Button>
                 <Button>Complete Order</Button>
             </DockPanel>
-        </DockPanel>
+        </Grid>
         <local:OrderSummaryControl DockPanel.Dock="Right" />
     </DockPanel>
 </Window>

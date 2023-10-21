@@ -52,8 +52,8 @@ namespace DataTests
         public void DrinkSizePropertyDefaultsToMediumTest()
         {
             var icedTea = new IcedTea();
-            Size.Sizes drinkSize = icedTea.DrinkSize;
-            Assert.Equal(Size.Sizes.Medium, drinkSize);
+            Size drinkSize = icedTea.DrinkSize;
+            Assert.Equal(Size.Medium, drinkSize);
         }
 
         /// <summary>
@@ -62,10 +62,10 @@ namespace DataTests
         /// <param name="drinkSize">the drink size</param>
         /// <param name="expectedPrice">the expected price</param>
         [Theory]
-        [InlineData(Size.Sizes.Small, 2.00)]
-        [InlineData(Size.Sizes.Medium, 2.50)]
-        [InlineData(Size.Sizes.Large, 3.00)]
-        public void PricePropertyCalculatesCorrectlyTest(Size.Sizes drinkSize, decimal expectedPrice)
+        [InlineData(Size.Small, 2.00)]
+        [InlineData(Size.Medium, 2.50)]
+        [InlineData(Size.Large, 3.00)]
+        public void PricePropertyCalculatesCorrectlyTest(Size drinkSize, decimal expectedPrice)
         {
             var icedTea = new IcedTea { DrinkSize = drinkSize };
             decimal price = icedTea.Price;
@@ -78,10 +78,10 @@ namespace DataTests
         /// <param name="drinkSize">the drink size</param>
         /// <param name="expectedCalories">the expected calories</param>
         [Theory]
-        [InlineData(Size.Sizes.Small, 175U)]
-        [InlineData(Size.Sizes.Medium, 220U)]
-        [InlineData(Size.Sizes.Large, 275U)]
-        public void CaloriesPropertyCalculatesCorrectlyTest(Size.Sizes drinkSize, uint expectedCalories)
+        [InlineData(Size.Small, 175U)]
+        [InlineData(Size.Medium, 220U)]
+        [InlineData(Size.Large, 275U)]
+        public void CaloriesPropertyCalculatesCorrectlyTest(Size drinkSize, uint expectedCalories)
         {
             var icedTea = new IcedTea { DrinkSize = drinkSize };
             uint calories = icedTea.Calories;
@@ -95,10 +95,10 @@ namespace DataTests
         /// <param name="ice">a flag indicating whether ice is included</param>
         /// <param name="expectedInstructions">the expected special instructions</param>
         [Theory]
-        [InlineData(Size.Sizes.Small, true, new string[] { "Drink size: Small" })]
-        [InlineData(Size.Sizes.Medium, false, new string[] { "Drink size: Medium", "Hold Ice" })]
-        [InlineData(Size.Sizes.Large, true, new string[] { "Drink size: Large" })]
-        public void SpecialInstructionsPropertyReturnsCorrectValueTest(Size.Sizes drinkSize, bool ice, string[] expectedInstructions)
+        [InlineData(Size.Small, true, new string[] { "Drink size: Small" })]
+        [InlineData(Size.Medium, false, new string[] { "Drink size: Medium", "Hold Ice" })]
+        [InlineData(Size.Large, true, new string[] { "Drink size: Large" })]
+        public void SpecialInstructionsPropertyReturnsCorrectValueTest(Size drinkSize, bool ice, string[] expectedInstructions)
         {
             var icedTea = new IcedTea { DrinkSize = drinkSize, Ice = ice };
 
@@ -106,6 +106,35 @@ namespace DataTests
             {
                 Assert.Contains(expectedInstruction, icedTea.SpecialInstructions);
             }
+        }
+
+        /// <summary>
+        /// notify property test
+        /// </summary>
+        /// <param name="size">the size</param>
+        /// <param name="propertyName">the property name</param>
+        [Theory]
+        [InlineData(Size.Small, "Price")]
+        [InlineData(Size.Medium, "Price")]
+        [InlineData(Size.Large, "Price")]
+        [InlineData(Size.Small, "CaloriesTotal")]
+        [InlineData(Size.Medium, "CaloriesTotal")]
+        [InlineData(Size.Large, "CaloriesTotal")]
+        [InlineData(Size.Small, "CaloriesPerEach")]
+        [InlineData(Size.Medium, "CaloriesPerEach")]
+        [InlineData(Size.Large, "CaloriesPerEach")]
+        [InlineData(Size.Small, "SpecialInstructions")]
+        [InlineData(Size.Medium, "SpecialInstructions")]
+        [InlineData(Size.Large, "SpecialInstructions")]
+        public void ChangingSizeShouldNotifyOfPropertyChanges(Size size, string propertyName)
+        {
+            IcedTea tea = new();
+            Assert.PropertyChanged(tea, propertyName, () => {
+                tea.DrinkSize = size;
+            });
+
+
+
         }
     }
 }
