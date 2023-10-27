@@ -214,6 +214,7 @@ namespace DataTests
 
         /// <summary>
         /// test if it implements properly
+        /// 
         /// </summary>
         [Fact]
         public void ShouldImplementINotifyChanged()
@@ -221,6 +222,7 @@ namespace DataTests
             Pizza pizza = new();
             Assert.IsAssignableFrom<INotifyPropertyChanged>(pizza);
         }
+
 
     }
 }
