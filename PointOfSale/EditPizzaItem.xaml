@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:PizzaParlor.PointOfSale"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="720">
-    <Grid>
+    <Grid x:Name="mainGrid">
         <Grid.Resources>
             <Style TargetType="TextBlock">
                 <Setter Property="FontSize" Value="20"/>
@@ -36,7 +36,6 @@
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding Path=Name}"/>
         <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Path=Description}"/>
-        <TextBlock Grid.Row="1" Grid.Column="0">Toppings:(TODO)</TextBlock>
         <Grid Grid.Row="1" Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>

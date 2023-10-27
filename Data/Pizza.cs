@@ -94,10 +94,40 @@ namespace PizzaParlor.Data
             }
         }
 
+
+        /// <summary>
+        /// private backing field
+        /// </summary>
+        private List<PizzaTopping> _toppings = new List<PizzaTopping>();
+
         /// <summary>
         /// A list of the possible toppings
         /// </summary>
-        virtual public List<PizzaTopping> PossibleToppings { get; set; } = new List<PizzaTopping>();
+        virtual public List<PizzaTopping> PossibleToppings
+        {
+            get
+            {
+                return _toppings;
+            }
+            set
+            {
+                _toppings = value;
+            }
+        }
+
+        /// <summary>
+        /// helper method to track changes to list
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">e</param>
+        public void OnToppingChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            
+            OnPropertyChanged(nameof(Price));
+            OnPropertyChanged(nameof(CaloriesPerEach));
+            OnPropertyChanged(nameof(CaloriesTotal));
+            OnPropertyChanged(nameof(SpecialInstructions));
+        }
 
         /// <summary>
         /// Calculates the price
@@ -159,7 +189,11 @@ namespace PizzaParlor.Data
 
                 foreach(PizzaTopping t in PossibleToppings)
                 {
-                    cal += t.BaseCalories;
+                    if(t.OnPizza == true)
+                    {
+                        cal += t.BaseCalories;
+                    }
+                    
                 }
 
                 if (PizzaSize == Size.Small)
@@ -217,7 +251,11 @@ namespace PizzaParlor.Data
 
                 foreach (PizzaTopping t in PossibleToppings)
                 {
-                    instructions.Add("Add " + t.Name);
+                    if(t.OnPizza == true)
+                    {
+                        instructions.Add("Add " + t.Name);
+                    }
+                    
                 }
 
                 return instructions;
@@ -235,6 +273,11 @@ namespace PizzaParlor.Data
             PossibleToppings.Add(new PizzaTopping(Topping.Olives, false));
             PossibleToppings.Add(new PizzaTopping(Topping.Peppers, false));
             PossibleToppings.Add(new PizzaTopping(Topping.Mushrooms, false));
+
+            foreach( PizzaTopping t in PossibleToppings)
+            {
+                t.PropertyChanged += OnToppingChanged;
+            }
         }
 
         /// <summary>

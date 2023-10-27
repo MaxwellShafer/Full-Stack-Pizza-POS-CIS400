@@ -169,7 +169,10 @@ namespace PizzaParlor.Data
                 _order.Remove(item);
 
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Count)));
-                CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, index));
+                CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, item, index));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Subtotal)));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Tax)));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Total)));
                 return true;
             }
             return false;

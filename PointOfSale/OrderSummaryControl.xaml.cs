@@ -1,6 +1,7 @@
 ﻿using PizzaParlor.Data;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -62,12 +63,49 @@ namespace PizzaParlor.PointOfSale
                     }
             }
 
-
-                        
-               // }
-               
-
         }
-    }
+
+        /// <summary>
+        /// event handler to delete a control
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">e</param>
+        public void HandleDeleteConrtrol(object sender, RoutedEventArgs e)
+        {
+
+            if (this.VisualParent is DockPanel parent)
+            {
+                //if(VisualTreeHelper.GetParent(VisualTreeHelper.GetParent(VisualTreeHelper.GetParent(parent))) is DockPanel mainDock )
+                //{
+                foreach (Grid grid in parent.Children.OfType<Grid>())
+                {
+                    foreach (MenuItemSelectionControl menuControl in grid.Children.OfType<MenuItemSelectionControl>())
+                    {
+                        menuControl.Visibility = Visibility.Visible;
+
+                    }
+
+                    foreach (UserControl orderControl in grid.Children.OfType<IEditOrder>())
+                    {
+                        if (orderControl.DataContext == ((Button)sender).DataContext)
+                        {
+                            if (this.DataContext is Order order)
+                            {
+                                if ((((Button)sender).DataContext) is IMenuItem item)
+                                {
+                                    order.Remove(item);
+                                }
+                                   
+                            }
+                            orderControl.Visibility = Visibility.Hidden;
+                        }
+                    }
+                }
+
+
+
+                }
+            }
+        }
 }
 

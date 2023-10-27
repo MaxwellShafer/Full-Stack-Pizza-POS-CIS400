@@ -21,6 +21,32 @@ namespace PizzaParlor.Data
         /// </summary>
         override public string Description { get; } = "All the meats";
 
+        /// <summary>
+        /// Calculates the price
+        /// </summary>
+        override public decimal Price
+        {
+            get
+            {
+               
+                decimal price = base.Price;
+                if (PizzaSize == Size.Small)
+                {
+                    price += 2.00M;
+                }
+                if (PizzaSize == Size.Medium)
+                {
+                    price += 2.00M;
+                }
+                if (PizzaSize == Size.Large)
+                {
+                    price += 2.00M;
+                }
+                
+
+                return price;
+            }
+        }
         public MeatsPizza() : base()
         {
             FindTopping(Topping.Sausage).OnPizza = true;

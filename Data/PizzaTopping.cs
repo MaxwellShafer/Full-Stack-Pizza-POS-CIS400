@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,7 +10,7 @@ namespace PizzaParlor.Data
     /// <summary>
     /// a class representing the toppings on a pizza.
     /// </summary>
-    public class PizzaTopping
+    public class PizzaTopping : INotifyPropertyChanged
     {
         /// <summary>
         /// constructor for a pizza topping
@@ -25,11 +26,24 @@ namespace PizzaParlor.Data
         /// The topping type
         /// </summary>
         public Topping ToppingType { get; init; }
-        
+
+
+        private bool _onPizza;
         /// <summary>
         /// if it is on the pizza
         /// </summary>
-        public bool OnPizza { get; set; }
+        public bool OnPizza
+        {
+            get
+            {
+                return _onPizza;
+            }
+            set
+            {
+                _onPizza = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(OnPizza)));
+            }
+        }
         
         /// <summary>
         /// the name of the property
@@ -127,6 +141,6 @@ namespace PizzaParlor.Data
             }
         }
 
-        
+        public event PropertyChangedEventHandler? PropertyChanged;
     }
 }

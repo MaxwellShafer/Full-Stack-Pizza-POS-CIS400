@@ -24,8 +24,7 @@ namespace PizzaParlor.PointOfSale
         public EditPizzaItem()
         {
             InitializeComponent();
-            Pizza p = new Pizza();
-            this.DataContext = p;
+            
         }
 
 
@@ -55,6 +54,52 @@ namespace PizzaParlor.PointOfSale
                     }
                 }
                 
+            }
+        }
+
+        /// <summary>
+        /// a method to generate topping controls
+        /// </summary>
+        /// <returns>the stackpanel containing the topping controls</returns>
+        /// <exception cref="ArgumentException">if the data class insnt pizza</exception>
+        public void LoadToppings()
+        {
+            if (DataContext is Pizza pizza)
+            {
+                StackPanel stack = new();
+                TextBlock toping = new();
+                toping.Text = "Toppings: ";
+                toping.FontSize = 20;
+                toping.Margin = new Thickness(5, 0, 5, 5);
+
+                stack.Children.Add(toping);
+                foreach (PizzaTopping topping in pizza.PossibleToppings)
+                {
+                    CheckBox box = new();
+                    box.DataContext = topping;
+                    Binding binding = new();
+                    binding.Path = new PropertyPath(nameof(topping.OnPizza));
+                    binding.Mode = BindingMode.TwoWay;
+                    BindingOperations.SetBinding(box, CheckBox.IsCheckedProperty, binding);
+
+
+                    TextBlock block = new();
+                    block.Margin =  new Thickness(5, 0, 5, 0);
+                    block.Text = topping.Name;
+                    box.Content = block;
+                    
+
+                    stack.Children.Add(box);
+                }
+
+                mainGrid.Children.Add(stack);
+                Grid.SetColumn(stack, 0);
+                Grid.SetRow(stack, 1);
+                
+            }
+            else
+            {
+                throw new ArgumentException("not pizza data context");
             }
         }
     }

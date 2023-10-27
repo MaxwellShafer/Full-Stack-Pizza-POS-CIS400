@@ -26,12 +26,14 @@ namespace PizzaParlor.PointOfSale
         /// Inintilizes Components
         /// </summary>
         public MainWindow()
-        { 
+        {
             InitializeComponent();
             this.DataContext = new Order();
 
 
         }
+
+        
 
         /// <summary>
         /// handles back to menu button
@@ -42,37 +44,95 @@ namespace PizzaParlor.PointOfSale
         {
             
             
-                foreach (Grid grid in mainDock.Children.OfType<Grid>())
-                {
-                    foreach (MenuItemSelectionControl menuControl in grid.Children.OfType<MenuItemSelectionControl>())
-                    {
-                        menuControl.Visibility = Visibility.Visible;
+             foreach (Grid grid in mainDock.Children.OfType<Grid>())
+             {
+                 foreach (MenuItemSelectionControl menuControl in grid.Children.OfType<MenuItemSelectionControl>())
+                 {
+                     menuControl.Visibility = Visibility.Visible;
 
-                    }
+                 }
 
-                    foreach (UserControl orderControl in grid.Children.OfType<IEditOrder>())
-                    {
-                        
-                            orderControl.Visibility = Visibility.Hidden;
-                        
-                    }
+                 foreach (UserControl orderControl in grid.Children.OfType<IEditOrder>())
+                 {
+                     
+                         orderControl.Visibility = Visibility.Hidden;
+                     
+                 }
 
 
 
-                }
+             }
             
-           
-                
-            
-
-
-
-            
-
-
         }
 
+        /// <summary>
+        /// handles the order cancel button
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">e</param>
+        private void HandleCancelButton(object sender, RoutedEventArgs e)
+        {
+            Order order = new Order();
+            OrderSummary.DataContext = order;
+            mainDock.DataContext = order;
+
+            foreach (Grid grid in mainDock.Children.OfType<Grid>())
+            {
+                foreach (MenuItemSelectionControl menuControl in grid.Children.OfType<MenuItemSelectionControl>())
+                {
+                    menuControl.Visibility = Visibility.Visible;
+
+                }
+
+                int i = 0;
+                while (grid.Children.OfType<IEditOrder>().Count() > 0)
+                {
+                    if (grid.Children[i] is IEditOrder editControl)
+                    {
+                        grid.Children.Remove((UIElement)editControl);
+                        i--;
+                    }
+                    i++;
+                }
+
+            }
+        }
+
+        /// <summary>
+        /// handeles complete order button;
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">e</param>
+        private void HandleCompleteOrder(object sender, RoutedEventArgs e)
+        {          
+
+            foreach( FrameworkElement orderSummaryControl in mainDock.Children)
+            {
+                
+                orderSummaryControl.Visibility = Visibility.Collapsed;
+
+            }
+
+            
 
 
+                PaymentControl completedOrder = new();
+            completedOrder.DataContext = OrderSummary.DataContext;
+
+            foreach (OrderSummaryControl orderSummaryControl in mainDock.Children.OfType<OrderSummaryControl>())
+            {
+
+
+
+                if (orderSummaryControl.DataContext is Order o)
+                {
+                    PaymentViewModel pay = new PaymentViewModel(o);
+                    completedOrder.DataContext = pay;
+                    
+                }
+            }
+            mainDock.Children.Add(completedOrder);
+            
+        }
     }
 }

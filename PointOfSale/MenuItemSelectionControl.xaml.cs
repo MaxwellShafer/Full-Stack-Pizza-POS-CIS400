@@ -41,6 +41,8 @@ namespace PizzaParlor.PointOfSale
             if (this.VisualParent is System.Windows.Controls.Grid parent)
             {
                 EditPizzaItem editPizzaControl = new();
+                editPizzaControl.DataContext = new Pizza();
+                editPizzaControl.LoadToppings();
                 parent.Children.Add(editPizzaControl);
                 foreach (MenuItemSelectionControl control in parent.Children.OfType<MenuItemSelectionControl>())
                 {
@@ -60,6 +62,9 @@ namespace PizzaParlor.PointOfSale
             if (this.VisualParent is System.Windows.Controls.Grid parent)
             {
                 EditPizzaItem editPizzaControl = new();
+                editPizzaControl.DataContext = new MeatsPizza();
+                editPizzaControl.LoadToppings();
+
                 parent.Children.Add(editPizzaControl);
                 foreach (MenuItemSelectionControl control in parent.Children.OfType<MenuItemSelectionControl>())
                 {
@@ -79,6 +84,9 @@ namespace PizzaParlor.PointOfSale
             if (this.VisualParent is System.Windows.Controls.Grid parent)
             {
                 EditPizzaItem editPizzaControl = new();
+                editPizzaControl.DataContext = new VeggiePizza();
+                editPizzaControl.LoadToppings();
+
                 parent.Children.Add(editPizzaControl);
                 foreach (MenuItemSelectionControl control in parent.Children.OfType<MenuItemSelectionControl>())
                 {
@@ -98,6 +106,9 @@ namespace PizzaParlor.PointOfSale
             if (this.VisualParent is System.Windows.Controls.Grid parent)
             {
                 EditPizzaItem editPizzaControl = new();
+                editPizzaControl.DataContext = new HawaiianPizza();
+                editPizzaControl.LoadToppings();
+
                 parent.Children.Add(editPizzaControl);
                 foreach (MenuItemSelectionControl control in parent.Children.OfType<MenuItemSelectionControl>())
                 {
@@ -117,6 +128,9 @@ namespace PizzaParlor.PointOfSale
             if (this.VisualParent is System.Windows.Controls.Grid parent)
             {
                 EditPizzaItem editPizzaControl = new();
+                editPizzaControl.DataContext = new SupremePizza();
+                editPizzaControl.LoadToppings();
+
                 parent.Children.Add(editPizzaControl);
                 foreach (MenuItemSelectionControl control in parent.Children.OfType<MenuItemSelectionControl>())
                 {

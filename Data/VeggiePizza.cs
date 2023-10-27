@@ -23,6 +23,33 @@ namespace PizzaParlor.Data
         override public string Description { get; } = "All the veggies";
 
         /// <summary>
+        /// Calculates the price
+        /// </summary>
+        override public decimal Price
+        {
+            get
+            {
+
+                decimal price = base.Price;
+
+                if (PizzaSize == Size.Small)
+                {
+                    price -= 1.00M;
+                }
+                if (PizzaSize == Size.Medium)
+                {
+                    price -= 1.00M;
+                }
+                if (PizzaSize == Size.Large)
+                {
+                    price -= 1.00M;
+                }
+
+
+                return price;
+            }
+        }
+        /// <summary>
         /// A constructor for veggie pizza
         /// </summary>
         public VeggiePizza() : base()

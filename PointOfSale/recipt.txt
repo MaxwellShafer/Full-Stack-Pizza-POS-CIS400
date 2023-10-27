@@ -1,0 +1,10 @@
+﻿------------
+10/27/2023 5:00:12 PM
+1
+Medium
+Original Crust
+Subtotal: $9.99
+Tax: $0.914085
+Total: $10.904085
+Paid: $10.904085
+Change: $0.000000

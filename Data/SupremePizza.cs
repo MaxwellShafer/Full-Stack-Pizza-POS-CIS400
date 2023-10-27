@@ -23,6 +23,35 @@ namespace PizzaParlor.Data
         /// </remarks>
         override public string Description => "Your standard supreme with meats and veggies";
 
+
+        /// <summary>
+        /// Calculates the price
+        /// </summary>
+        override public decimal Price
+        {
+            get
+            {
+
+                decimal price = base.Price;
+
+                if (PizzaSize == Size.Small)
+                {
+                    price -= 2.00M;
+                }
+                if (PizzaSize == Size.Medium)
+                {
+                    price -= 2.00M;
+                }
+                if (PizzaSize == Size.Large)
+                {
+                    price -= 2.00M;
+                }
+
+
+                return price;
+            }
+        }
+
         /// <summary>
         /// A constructor for a supreme pizza
         /// </summary>

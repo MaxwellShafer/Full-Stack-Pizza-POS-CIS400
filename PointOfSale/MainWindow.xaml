@@ -31,11 +31,11 @@
             </Grid.RowDefinitions>
             <local:MenuItemSelectionControl x:Name="MenuControl" Grid.Row="0" Height="600"/>
             <DockPanel Grid.Row="1">
-                <Button>Cancel Order</Button>
+                <Button Click="HandleCancelButton">Cancel Order</Button>
                 <Button Click="HandleBackToMenu">Back to Menu</Button>
-                <Button>Complete Order</Button>
+                <Button Click="HandleCompleteOrder">Complete Order</Button>
             </DockPanel>
         </Grid>
-        <local:OrderSummaryControl DockPanel.Dock="Right" />
+        <local:OrderSummaryControl x:Name="OrderSummary" DockPanel.Dock="Right" />
     </DockPanel>
 </Window>

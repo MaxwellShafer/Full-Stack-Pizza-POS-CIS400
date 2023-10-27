@@ -36,7 +36,7 @@
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding Path=Name}"/>
         <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Path=Description}"/>
-        <TextBlock Grid.Row="1" Grid.Column="0">Toppings:(TODO)</TextBlock>
+
         <Grid Grid.Row="1" Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
