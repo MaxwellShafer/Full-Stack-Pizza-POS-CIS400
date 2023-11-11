@@ -91,12 +91,12 @@ namespace DataTests
         /// <param name="topping2">topping2</param>
         /// <param name="topping3">topping3</param>
         [Theory]
-        [InlineData(Size.Small, Crust.Original, Topping.Sausage, Topping.Ham, Topping.Bacon, 277U)]
-        [InlineData(Size.Medium, Crust.Original, Topping.Pineapple, Topping.Ham, Topping.Onions, 370U)]
-        [InlineData(Size.Large, Crust.Original, Topping.Mushrooms, Topping.Peppers, Topping.Pepperoni, 481U)]
-        [InlineData(Size.Small, Crust.DeepDish, Topping.Bacon, Topping.Pepperoni, Topping.Mushrooms, 315U)]
-        [InlineData(Size.Medium, Crust.DeepDish, Topping.Pepperoni, Topping.Olives, Topping.Peppers, 420U)]
-        [InlineData(Size.Large, Crust.DeepDish, Topping.Sausage, Topping.Pineapple, Topping.Pepperoni, 546U)]
+        [InlineData(Size.Small, Crust.Original, Topping.Sausage, Topping.Ham, Topping.Bacon, 240U)]
+        [InlineData(Size.Medium, Crust.Original, Topping.Pineapple, Topping.Ham, Topping.Onions, 285U)]
+        [InlineData(Size.Large, Crust.Original, Topping.Mushrooms, Topping.Peppers, Topping.Pepperoni, 364U)]
+        [InlineData(Size.Small, Crust.DeepDish, Topping.Bacon, Topping.Pepperoni, Topping.Mushrooms, 258U)]
+        [InlineData(Size.Medium, Crust.DeepDish, Topping.Pepperoni, Topping.Olives, Topping.Peppers, 330U)]
+        [InlineData(Size.Large, Crust.DeepDish, Topping.Sausage, Topping.Pineapple, Topping.Pepperoni, 468U)]
         public void CaloriesPerEachPropertyCalculatesCorrectly(Size pizzaSize, Crust crust, Topping topping1, Topping topping2, Topping topping3, uint expectedCalories)
         {
             var pizza = new Pizza
@@ -123,12 +123,12 @@ namespace DataTests
         /// <param name="topping2">topping2</param>
         /// <param name="topping3">topping3</param>
         [Theory]
-        [InlineData(Size.Small, Crust.Original, Topping.Sausage, Topping.Ham, Topping.Bacon, 2216U)]
-        [InlineData(Size.Medium, Crust.Original, Topping.Pineapple, Topping.Ham, Topping.Onions, 2960U)]
-        [InlineData(Size.Large, Crust.Original, Topping.Mushrooms, Topping.Peppers, Topping.Pepperoni, 3848U)]
-        [InlineData(Size.Small, Crust.DeepDish, Topping.Bacon, Topping.Pepperoni, Topping.Mushrooms, 2520U)]
-        [InlineData(Size.Medium, Crust.DeepDish, Topping.Pepperoni, Topping.Olives, Topping.Peppers, 3360U)]
-        [InlineData(Size.Large, Crust.DeepDish, Topping.Sausage, Topping.Pineapple, Topping.Pepperoni, 4368U)]
+        [InlineData(Size.Small, Crust.Original, Topping.Sausage, Topping.Ham, Topping.Bacon, 1920U)]
+        [InlineData(Size.Medium, Crust.Original, Topping.Pineapple, Topping.Ham, Topping.Onions, 2280U)]
+        [InlineData(Size.Large, Crust.Original, Topping.Mushrooms, Topping.Peppers, Topping.Pepperoni, 2912U)]
+        [InlineData(Size.Small, Crust.DeepDish, Topping.Bacon, Topping.Pepperoni, Topping.Mushrooms, 2064U)]
+        [InlineData(Size.Medium, Crust.DeepDish, Topping.Pepperoni, Topping.Olives, Topping.Peppers, 2640U)]
+        [InlineData(Size.Large, Crust.DeepDish, Topping.Sausage, Topping.Pineapple, Topping.Pepperoni, 3744U)]
         public void CaloriesTotalPropertyCalculatesCorrectly(Size pizzaSize, Crust crust, Topping topping1, Topping topping2, Topping topping3, uint expectedCalories)
         {
             var pizza = new Pizza

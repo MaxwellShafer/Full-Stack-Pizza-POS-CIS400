@@ -60,6 +60,66 @@ namespace PizzaParlor.Data
             FindTopping(Topping.Onions).OnPizza = true;
 
         }
+
+        /// <summary>
+        /// special instructions
+        /// </summary>
+        override public IEnumerable<string> SpecialInstructions
+        {
+            get
+            {
+                List<string> instructions = new();
+
+                if (PizzaSize == Size.Small)
+                {
+                    instructions.Add("Small");
+                }
+                if (PizzaSize == Size.Medium)
+                {
+                    instructions.Add("Medium");
+                }
+                if (PizzaSize == Size.Large)
+                {
+                    instructions.Add("Large");
+                }
+
+                if (PizzaCrust == Crust.Thin)
+                {
+                    instructions.Add("Thin Crust");
+                }
+                if (PizzaCrust == Crust.Original)
+                {
+                    instructions.Add("Original Crust");
+                }
+                if (PizzaCrust == Crust.DeepDish)
+                {
+                    instructions.Add("Deep Dish");
+                }
+
+                foreach (PizzaTopping t in PossibleToppings)
+                {
+                    if(t.ToppingType == Topping.Pineapple || t.ToppingType == Topping.Ham  || t.ToppingType == Topping.Onions)
+                    {
+                        if(t.OnPizza == false)
+                        {
+                            instructions.Add("Hold " + t.Name);
+                        }
+                    }
+                    else
+                    {
+                        if (t.OnPizza == true)
+                        {
+                            instructions.Add("Add " + t.Name);
+                        }
+                    }
+                    
+
+                }
+
+                return instructions;
+            }
+        }
+
     }
 
 }

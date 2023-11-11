@@ -1,0 +1,67 @@
+﻿@page
+@using PizzaParlor.Data
+@model IndexModel
+@{
+    ViewData["Title"] = "Pizza Parlor";
+
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome to the Pizza Parlor</h1>
+
+
+</div>
+<h1 id="pizzas"> Pizzas </h1>
+@foreach (IMenuItem item in Menu.Pizzas)
+{
+    <button class= "menu-item">
+        @item.Name.ToString()
+        
+        @foreach(string s in item.SpecialInstructions)
+        {
+            <h3 class = "item-instructions">@s</h3>
+        }
+         <div class="item-details">
+            $@item.Price<br>            
+            @item.CaloriesPerEach Calories
+         </div>  
+        
+        
+    </button>
+}
+<h1 id="sides"> Sides </h1>
+@foreach (IMenuItem item in Menu.Sides)
+{
+    <button class= "menu-item">
+        @item.Name.ToString()
+        
+        @foreach(string s in item.SpecialInstructions)
+        {
+            <h3 class = "item-instructions">@s</h3>
+        }
+         <div class="item-details">
+            $@item.Price<br>            
+            @item.CaloriesPerEach Calories
+         </div>  
+        
+        
+    </button>
+}
+<h1 id="drinks"> Drinks </h1>
+@foreach (IMenuItem item in Menu.Drinks)
+{
+    <button class= "menu-item">
+        @item.Name.ToString()
+        
+        @foreach(string s in item.SpecialInstructions)
+        {
+            <h3 class = "item-instructions">@s</h3>
+        }
+         <div class="item-details">
+            $@item.Price<br>            
+            @item.CaloriesPerEach Calories
+         </div>  
+        
+        
+    </button>
+}

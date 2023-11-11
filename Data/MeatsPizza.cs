@@ -28,7 +28,7 @@ namespace PizzaParlor.Data
         {
             get
             {
-               
+
                 decimal price = base.Price;
                 if (PizzaSize == Size.Small)
                 {
@@ -42,7 +42,7 @@ namespace PizzaParlor.Data
                 {
                     price += 2.00M;
                 }
-                
+
 
                 return price;
             }
@@ -53,6 +53,65 @@ namespace PizzaParlor.Data
             FindTopping(Topping.Bacon).OnPizza = true;
             FindTopping(Topping.Ham).OnPizza = true;
             FindTopping(Topping.Pepperoni).OnPizza = true;
+        }
+
+        /// <summary>
+        /// special instructions
+        /// </summary>
+        override public IEnumerable<string> SpecialInstructions
+        {
+            get
+            {
+                List<string> instructions = new();
+
+                if (PizzaSize == Size.Small)
+                {
+                    instructions.Add("Small");
+                }
+                if (PizzaSize == Size.Medium)
+                {
+                    instructions.Add("Medium");
+                }
+                if (PizzaSize == Size.Large)
+                {
+                    instructions.Add("Large");
+                }
+
+                if (PizzaCrust == Crust.Thin)
+                {
+                    instructions.Add("Thin Crust");
+                }
+                if (PizzaCrust == Crust.Original)
+                {
+                    instructions.Add("Original Crust");
+                }
+                if (PizzaCrust == Crust.DeepDish)
+                {
+                    instructions.Add("Deep Dish");
+                }
+
+                foreach (PizzaTopping t in PossibleToppings)
+                {
+                    if (t.ToppingType == Topping.Bacon || t.ToppingType == Topping.Ham || t.ToppingType == Topping.Sausage || t.ToppingType == Topping.Pepperoni)
+                    {
+                        if (t.OnPizza == false)
+                        {
+                            instructions.Add("Hold " + t.Name);
+                        }
+                    }
+                    else
+                    {
+                        if (t.OnPizza == true)
+                        {
+                            instructions.Add("Add " + t.Name);
+                        }
+                    }
+
+
+                }
+
+                return instructions;
+            }
         }
     }
 }
