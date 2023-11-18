@@ -175,5 +175,86 @@ namespace PizzaParlor.Data
             }
             return list;
         }
+
+
+        /// <summary>
+        /// a method to filter by price
+        /// </summary>
+        /// <param name="items">the current item list</param>
+        /// <param name="min">the min price</param>
+        /// <param name="max">the max price</param>
+        /// <returns>the new list</returns>
+        public static IEnumerable<IMenuItem> FilterByPrice(IEnumerable<IMenuItem> items, decimal? min, decimal? max)
+        {
+            if (min == null) min = 0;
+            if (max == null || max == 0) max = decimal.MaxValue;
+            return from item in items where item.Price >= min && item.Price <= max select item;
+
+        }
+
+        /// <summary>
+        /// a method to filter by cal
+        /// </summary>
+        /// <param name="items">the current item list</param>
+        /// <param name="min">the min calories</param>
+        /// <param name="max">the max calories</param>
+        /// <returns>the new list</returns>
+        public static IEnumerable<IMenuItem> FilterByCalories(IEnumerable<IMenuItem> items, int? min, int? max)
+        {
+            if (min == null) min = 0;
+            if (max == null || max == 0) max = int.MaxValue;
+            return from item in items where item.CaloriesPerEach >= min && item.CaloriesPerEach <= max select item;
+
+        }
+
+
+        /// <summary>
+        /// filter by search term
+        /// </summary>
+        /// <param name="items">item list</param>
+        /// <param name="term">the search term</param>
+        /// <returns>the filterd list</returns>
+        public static IEnumerable<IMenuItem> FilterBySearchTerms(IEnumerable<IMenuItem> items, string term)
+        {
+            
+            if (term != null)
+            {
+                string[] terms = term.Split(' ');
+                List<IMenuItem> list = new List<IMenuItem>();
+                foreach (IMenuItem item in items)
+                {
+                    foreach(string s in terms)
+                    {
+                        if (item.Name.Contains(s, StringComparison.CurrentCultureIgnoreCase))
+                        {
+                            list.Add(item);
+                        }
+                        else
+                        {
+                            foreach (string ins in item.SpecialInstructions)
+                            {
+                                if (ins.Contains(s, StringComparison.CurrentCultureIgnoreCase))
+                                {
+                                    list.Add(item);
+                                    break;
+                                }
+                            }
+                        }
+                        
+
+                    }
+                    
+                }
+                return list;
+            }
+            else
+            {
+                return items;
+            }
+
+        }
+
+
+
     }
 }

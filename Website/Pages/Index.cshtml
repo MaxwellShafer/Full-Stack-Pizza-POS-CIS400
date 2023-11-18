@@ -11,8 +11,26 @@
 
 
 </div>
+<form>
+    <input type="text" name="SearchTerms" value="@Model.SearchTerms" /> 
+    <input type="submit" value="Search" /> <br />
+
+    <div>
+        Price: <br />
+       Min: <input name="MinPrice" type="number" min="0" max="100" step="0.01" placeholder="min" value="@Model.MinPrice" />       
+       Max: <input name="MaxPrice" type="number" min="0" max="100" step="1" placeholder="max"value="@Model.MaxPrice" />
+    </div>
+    <div>
+        Calories: <br />
+        Min: <input name="MinCalories" type="number" min="0" max="10000" step="1" placeholder="min" value="@Model.MinCalories"/>
+        Max: <input name="MaxCalories" type="number" min="0" max="10000" step="1" placeholder="max" value="@Model.MaxCalories" />
+    </div>
+    
+     
+</form>
+
 <h1 id="pizzas"> Pizzas </h1>
-@foreach (IMenuItem item in Menu.Pizzas)
+@foreach (IMenuItem item in Menu.FilterByPrice(Menu.FilterByCalories(Menu.FilterBySearchTerms(Menu.Pizzas, Model.SearchTerms), Model.MinCalories, Model.MaxCalories), Model.MinPrice, Model.MaxPrice))
 {
     <button class= "menu-item">
         @item.Name.ToString()
@@ -30,7 +48,7 @@
     </button>
 }
 <h1 id="sides"> Sides </h1>
-@foreach (IMenuItem item in Menu.Sides)
+@foreach (IMenuItem item in Menu.FilterByPrice(Menu.FilterByCalories(Menu.FilterBySearchTerms(Menu.Sides, Model.SearchTerms), Model.MinCalories, Model.MaxCalories), Model.MinPrice, Model.MaxPrice)) 
 {
     <button class= "menu-item">
         @item.Name.ToString()
@@ -48,7 +66,7 @@
     </button>
 }
 <h1 id="drinks"> Drinks </h1>
-@foreach (IMenuItem item in Menu.Drinks)
+@foreach (IMenuItem item in Menu.FilterByPrice(Menu.FilterByCalories(Menu.FilterBySearchTerms(Menu.Drinks, Model.SearchTerms), Model.MinCalories, Model.MaxCalories), Model.MinPrice, Model.MaxPrice))
 {
     <button class= "menu-item">
         @item.Name.ToString()
