@@ -1,0 +1,17 @@
+﻿@page
+@model Website.Pages.ReviewModel
+@{
+    ViewData["Title"] = "Review";
+}
+
+<h1>@ViewData["Title"] of the Pizza Parlor</h1>
+<form method ="post">
+    <input type="text" name="SubmitReview" value="@Model.SubmitReview"/>
+    <input type="submit" value="Submit Review" />
+</form>
+@foreach(string s in Model.Reviews)
+{
+    <p>@s</p>
+}
+
+

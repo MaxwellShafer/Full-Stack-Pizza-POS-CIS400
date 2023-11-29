@@ -214,7 +214,7 @@ namespace PizzaParlor.Data
         /// <param name="items">item list</param>
         /// <param name="term">the search term</param>
         /// <returns>the filterd list</returns>
-        public static IEnumerable<IMenuItem> FilterBySearchTerms(IEnumerable<IMenuItem> items, string term)
+        public static IEnumerable<IMenuItem> FilterBySearchTerms(IEnumerable<IMenuItem> items, string? term)
         {
             
             if (term != null)
