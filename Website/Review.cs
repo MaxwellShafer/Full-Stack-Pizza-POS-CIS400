@@ -39,7 +39,7 @@ namespace Website
         {
             if (review != null)
             {
-                review = review + DateTime.Now;
+                review = review + "   " + DateTime.Now;
                 _reviews.Insert(0,review);
                
                 System.IO.File.WriteAllText("reviews.json", JsonConvert.SerializeObject(_reviews));
